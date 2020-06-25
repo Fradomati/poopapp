@@ -1,7 +1,8 @@
 import React, { createContext, useState, useEffect } from "react";
 import { StartedButton, StoppedButton } from "./style"
+import { fnGetDay, fnGetTime } from "../../../lib/ApiFiles/Api_Timer"
 
-export const StartStop = createContext();
+export const StartStopContext = createContext();
 
 export const StartStopButton = props => {
 
@@ -9,13 +10,16 @@ export const StartStopButton = props => {
 
     const push = x => {
         setStart(x)
+        let day = fnGetDay()
+        let time = fnGetTime()
+        console.log(day, time)
     }
 
 
     return (
 
 
-        <StartStop.Provider>
+        <StartStopContext.Provider value={{ start }}>
 
             <div>
                 {start == false && <StartedButton onClick={() => { push(true) }}>Start</StartedButton>}
@@ -23,7 +27,7 @@ export const StartStopButton = props => {
             </div>
 
             {props.children}
-        </StartStop.Provider>
+        </StartStopContext.Provider>
 
     )
 

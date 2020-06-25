@@ -35374,24 +35374,7 @@ var Layout = function Layout(_ref) {
 };
 
 exports.Layout = Layout;
-},{"react":"../node_modules/react/index.js","./style":"../src/interface/layout/style.js","../navbar/index":"../src/interface/navbar/index.js","../../components/main_button/index":"../src/components/main_button/index.js"}],"../src/pages/home/index.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Home = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Home = function Home() {
-  return /*#__PURE__*/_react.default.createElement("div", null, "Est\xE1s en la home");
-};
-
-exports.Home = Home;
-},{"react":"../node_modules/react/index.js"}],"../src/contexts/StartStop/style.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./style":"../src/interface/layout/style.js","../navbar/index":"../src/interface/navbar/index.js","../../components/main_button/index":"../src/components/main_button/index.js"}],"../src/contexts/StartStop/style.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35432,17 +35415,245 @@ exports.StartedButton = StartedButton;
 var StoppedButton = _styledComponents.default.button(_templateObject2());
 
 exports.StoppedButton = StoppedButton;
-},{"styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js"}],"../src/contexts/StartStop/index.js":[function(require,module,exports) {
+},{"styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js"}],"../lib/ApiFiles/Api_Timer.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.StartStopButton = exports.StartStop = void 0;
+exports.fnIntData = exports.random = exports.fnHalfTime = exports.fnSumTime = exports.fnCalTime = exports.fnHourDay = exports.fnDayWeek = exports.fnMountTime = exports.fnGetSecs = exports.fnGetTime = exports.fnGetDay = void 0;
+
+// import { addTimer } from "../src/connects/dataConnect";
+var fnGetDay = function fnGetDay() {
+  var day = new Date().getUTCDay();
+  return day;
+};
+
+exports.fnGetDay = fnGetDay;
+
+var fnGetTime = function fnGetTime() {
+  var t = new Date();
+  var h = t.getHours();
+  var m = t.getMinutes();
+  var s = t.getSeconds();
+  var tc = {
+    hour: h,
+    min: m,
+    sec: s
+  };
+  return tc;
+}; // Fn -> Pass to Seconds
+
+
+exports.fnGetTime = fnGetTime;
+
+var fnGetSecs = function fnGetSecs(t) {
+  var secs = t.hour * 3600 + t.min * 60 + t.sec;
+  return secs;
+}; // Fn -> Create Object {hour, mint, sec}
+
+
+exports.fnGetSecs = fnGetSecs;
+
+var fnMountTime = function fnMountTime(secs) {
+  var h = Math.floor(secs / 60 / 60);
+  var m = Math.floor(secs / 60) - h * 60;
+  var s = Math.floor(secs % 60);
+  var userTime = {
+    hour: h,
+    min: m,
+    sec: s
+  };
+  return userTime;
+}; // Media de Días
+
+
+exports.fnMountTime = fnMountTime;
+
+var fnDayWeek = function fnDayWeek(days) {
+  var sum = fnSum(days);
+  var half = sum / days.length;
+  console.log(Math.floor(half), "|||||||||||||||||||||||||||||");
+
+  switch (Math.floor(half)) {
+    case 1:
+      return "Lunes";
+
+    case 2:
+      return "Martes";
+
+    case 3:
+      return "Miércoles";
+
+    case 4:
+      return "Jueves";
+
+    case 5:
+      return "Viernes";
+
+    case 6:
+      return "Sábado";
+
+    case 7:
+      return "Domingo";
+
+    default:
+      console.log("No coincide ningún día");
+  }
+}; // Hora del día Media
+
+
+exports.fnDayWeek = fnDayWeek;
+
+var fnHourDay = function fnHourDay(hours) {
+  // Resultado
+  var count = 0;
+  var numWin = 0;
+
+  var _loop = function _loop(i) {
+    // Las cuentas
+    var countNum = 0;
+    var num = i;
+    hours.forEach(function (e) {
+      if (e == num) countNum++;
+    });
+
+    if (countNum >= count) {
+      count = countNum;
+      numWin = num;
+    }
+  };
+
+  for (var i = 1; i <= 24; i++) {
+    _loop(i);
+  }
+
+  return numWin;
+};
+
+exports.fnHourDay = fnHourDay;
+
+var fnCalTime = function fnCalTime(time) {
+  var id = time.id; // Id User
+
+  var start = time.start; // Tiempo Inicio
+
+  var end = time.end; // Tiempo End
+
+  var hour = time.hour; // Hora
+
+  var segStart = fnGetSecs(start);
+  var segEnd = fnGetSecs(end);
+  var totalSec = segEnd - segStart; // Total de seconds
+
+  var day = fnGetDay(); // Día de hoy
+  //   addTimer({ id: id, secs: totalSec, day: day, hour: hour }); // Envío los datos al back
+
+  var mount = fnMountTime(totalSec);
+  return totalSec;
+}; // Media Tiempo
+
+
+exports.fnCalTime = fnCalTime;
+
+var fnSum = function fnSum(time) {
+  return time.reduce(function (a, b) {
+    return a + b;
+  }, 0);
+};
+
+var fnSumTime = function fnSumTime(time) {
+  var sum = fnSum(time);
+  return fnMountTime(sum);
+};
+
+exports.fnSumTime = fnSumTime;
+
+var fnHalfTime = function fnHalfTime(time) {
+  var count = time.length;
+  var sum = fnSum(time);
+  var half = sum / count;
+  var hTime = fnMountTime(half);
+  return hTime;
+}; // Timers of the World!
+
+
+exports.fnHalfTime = fnHalfTime;
+
+var random = function random(num) {
+  return Math.floor(Math.random() * (num - 0)) + 0;
+};
+
+exports.random = random;
+
+var fnIntData = function fnIntData(time) {
+  var hour = time.hour,
+      min = time.min,
+      sec = time.sec;
+
+  if (hour > 0) {
+    return "más de una hora!";
+  } else if (min > 0) {
+    if (min < 2) {
+      return timesLess1hour.less2[random(timesLess1hour.less2.length)];
+    } else if (min < 5) {
+      return timesLess1hour.less5[random(timesLess1hour.less5.length)];
+    } else if (min < 15) {
+      return timesLess1hour.less15[random(timesLess1hour.less15.length)];
+    } else if (min < 30) {
+      return timesLess1hour.less30[random(timesLess1hour.less30.length)];
+    } else if (min < 60) {
+      return timesLess1hour.less60[random(timesLess1hour.less60.length)];
+    } else {
+      console.log("ASUASDASMLFASFM", timesLess1hour.less2[random(timesLess1hour.less2.length)]);
+      return timesLess1hour.less2[random(timesLess1hour.less2.length)];
+    }
+  } else if (sec > 0) {
+    if (sec < 10) {
+      return timesLess1mint.less10[random(timesLess1mint.less10.length)];
+    } else if (sec < 30) {
+      return timesLess1mint.less30[random(timesLess1mint.less30.length)];
+    } else if (sec < 50) {
+      return timesLess1mint.less40[random(timesLess1mint.less40.length)];
+    } else {
+      return timesLess1mint.less60[random(timesLess1mint.less60.length)];
+    }
+  }
+}; // Menos de 1 mint
+
+
+exports.fnIntData = fnIntData;
+var timesLess1mint = {
+  less10: ["El r\xE9cord de hacer girar la pelota sobre la nariz pertenece a \"Scooter\", Christense, de los Harlem Globetrotters. 7,7 segundos", "Usain Bolt corri\xF3 los 100m en solo 9,58s", "Jack Cai, tiene el r\xE9cord de resolver el Cubo de Rubik en 16,22s... con los ojos cerrados."],
+  less30: ["Usain Bolt corri\xF3 los 200m en solo 19,19s", "Christopher Irmscher tiene el r\xE9cord de los 100m vallas... con aletas de buceo. 14,82s", "Kenichi Ito, japon\xE9s que bati\xF3 el r\xE9cord de 100 metros liso corriendo a 4 patas. 18,58s"],
+  less50: ["Lean Shutkever, de Reino Unidos, tiene el r\xE9cord de comerse un burrito de 44,20s", "Scott Murphy obstenta el r\xE9cord de doblar una sart\xE9n de aluminio de 30cm a 17,46cm en 30s"],
+  less60: ["David Rush tiene el prestigioso r\xE9cord de quitar 70 calcetines en menos de un minuto"]
+}; // Menos de 1 hora
+
+var timesLess1hour = {
+  less2: ["El Pr\xEDncipe Harry y su mujer Meghan, tienen el r\xE9cord del p\xE9rfil de instagram en alcanzar antes el mill\xF3n de segudores. 5h:45m, 2899/mint.", "Liza Thomas, un \"barman\" de Queensland (Australia), tiene el r\xE9cord de preparar 420 capuchinos en una hora, 7 cada minuto", "La tirolina m\xE1s larga del mundo se encuentra en la monta\xF1a de Jebel Jaisen, al norte de los Emiratos. 2m y 2s de duraci\xF3n (150km/h)"],
+  less5: ["Michael Phelps hizo los 400m estilos de nataci\xF3n en 4m y 3s (R\xE9cord Mundial)", "El famoso salto de Felix Baumgartner desde el espacio con Red Bull Stratos, tuvo una ca\xEDda libre de m\xE1s de 4 minutos de duraci\xF3n."],
+  less15: ["Amancio Ortega gana 646,95\u20AC cada minuto. Casi 10.000\u20AC cada 15 minutos"],
+  less30: ["El espa\xF1ol Aleix segura, tiene el r\xE9cord de apnea de \xA124m y 3s!"],
+  less60: ["Wim Hoff tiene r\xE9cord de tiempo enterrado en la nieve, desnudo. 42 min y 22s"]
+}; // Más de 1 hora
+
+var timeLess1hour = {
+  less1: ["Wim Hoff tiene r\xE9cord de tiempo enterrado en la nieve, desnudo. 42 min y 22s"]
+};
+},{}],"../src/contexts/StartStop/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.StartStopButton = exports.StartStopContext = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
 var _style = require("./style");
+
+var _Api_Timer = require("../../../lib/ApiFiles/Api_Timer");
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
@@ -35460,8 +35671,8 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var StartStop = (0, _react.createContext)();
-exports.StartStop = StartStop;
+var StartStopContext = (0, _react.createContext)();
+exports.StartStopContext = StartStopContext;
 
 var StartStopButton = function StartStopButton(props) {
   var _useState = (0, _react.useState)(false),
@@ -35471,9 +35682,16 @@ var StartStopButton = function StartStopButton(props) {
 
   var push = function push(x) {
     setStart(x);
+    var day = (0, _Api_Timer.fnGetDay)();
+    var time = (0, _Api_Timer.fnGetTime)();
+    console.log(day, time);
   };
 
-  return /*#__PURE__*/_react.default.createElement(StartStop.Provider, null, /*#__PURE__*/_react.default.createElement("div", null, start == false && /*#__PURE__*/_react.default.createElement(_style.StartedButton, {
+  return /*#__PURE__*/_react.default.createElement(StartStopContext.Provider, {
+    value: {
+      start: start
+    }
+  }, /*#__PURE__*/_react.default.createElement("div", null, start == false && /*#__PURE__*/_react.default.createElement(_style.StartedButton, {
     onClick: function onClick() {
       push(true);
     }
@@ -35485,7 +35703,32 @@ var StartStopButton = function StartStopButton(props) {
 };
 
 exports.StartStopButton = StartStopButton;
-},{"react":"../node_modules/react/index.js","./style":"../src/contexts/StartStop/style.js"}],"../src/App.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./style":"../src/contexts/StartStop/style.js","../../../lib/ApiFiles/Api_Timer":"../lib/ApiFiles/Api_Timer.js"}],"../src/pages/home/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Home = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _index = require("../../contexts/StartStop/index");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+var Home = function Home(props) {
+  var _useContext = (0, _react.useContext)(_index.StartStopContext),
+      start = _useContext.start;
+
+  console.log(start);
+  return /*#__PURE__*/_react.default.createElement("div", null, "Est\xE1s en la home");
+};
+
+exports.Home = Home;
+},{"react":"../node_modules/react/index.js","../../contexts/StartStop/index":"../src/contexts/StartStop/index.js"}],"../src/App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
