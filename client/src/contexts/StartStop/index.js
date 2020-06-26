@@ -7,19 +7,21 @@ export const StartStopContext = createContext();
 export const StartStopButton = props => {
 
     const [start, setStart] = useState(false)
+    const [time, setTime] = useState("")
 
     const push = x => {
         setStart(x)
         let day = fnGetDay()
         let time = fnGetTime()
-        console.log(day, time)
+        setTime(time)
+
     }
 
 
     return (
 
 
-        <StartStopContext.Provider value={{ start }}>
+        <StartStopContext.Provider value={{ start, time }}>
 
             <div>
                 {start == false && <StartedButton onClick={() => { push(true) }}>Start</StartedButton>}
