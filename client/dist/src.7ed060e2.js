@@ -35675,7 +35675,17 @@ var StartStopContext = (0, _react.createContext)();
 exports.StartStopContext = StartStopContext;
 
 var StartStopButton = function StartStopButton(props) {
-  var _useState = (0, _react.useState)(false),
+  var _useState = (0, _react.useState)(function () {
+    var status = localStorage.getItem("timeStatus");
+
+    if (localStorage.getItem("timeStatus") == "true") {
+      console.log("Bla");
+      return true;
+    } else {
+      console.log("Blue");
+      return false;
+    }
+  }),
       _useState2 = _slicedToArray(_useState, 2),
       start = _useState2[0],
       setStart = _useState2[1];
@@ -35690,6 +35700,16 @@ var StartStopButton = function StartStopButton(props) {
     var day = (0, _Api_Timer.fnGetDay)();
     var time = (0, _Api_Timer.fnGetTime)();
     setTime(time);
+
+    if (x == true) {
+      localStorage.setItem("timeOne", JSON.stringify(time));
+      localStorage.setItem("timeStatus", true);
+    } else {
+      var test = JSON.parse(localStorage.getItem("timeOne"));
+      console.log("Primer time", test, "Segundo time", time);
+      localStorage.setItem("timeOne", "");
+      localStorage.setItem("timeStatus", "");
+    }
   };
 
   return /*#__PURE__*/_react.default.createElement(StartStopContext.Provider, {
@@ -35830,7 +35850,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64815" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60757" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
