@@ -3,7 +3,7 @@ import { StartStopContext } from "../../contexts/StartStop/index"
 
 export const Home = props => {
 
-    const { start, time } = useContext(StartStopContext)
+    const { start, time, currTime } = useContext(StartStopContext)
     const [timer, setTimer] = useState("Nothing")
 
     useEffect(() => {
@@ -17,6 +17,7 @@ export const Home = props => {
         <>
             <div>Estás en la home</div>
             <div>Tiempos: {timer}</div>
+            {currTime && < div > Tu tiempo ha sido: {currTime}</div>}
         </>
     )
 }

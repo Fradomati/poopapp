@@ -83,8 +83,8 @@ export const fnHourDay = (hours) => {
 
 export const fnCalTime = (time) => {
     const id = time.id; // Id User
-    let start = time.start; // Tiempo Inicio
-    let end = time.end; // Tiempo End
+    let start = time.firstTime; // Tiempo Inicio
+    let end = time.secondTime; // Tiempo End
     let hour = time.hour; // Hora
 
     const segStart = fnGetSecs(start);

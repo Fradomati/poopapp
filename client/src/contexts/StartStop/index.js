@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import { StartedButton, StoppedButton } from "./style"
-import { fnGetDay, fnGetTime } from "../../../lib/ApiFiles/Api_Timer"
+import { fnGetDay, fnGetTime, fnCalTime } from "../../../lib/ApiFiles/Api_Timer"
 
 export const StartStopContext = createContext();
 
@@ -16,7 +16,8 @@ export const StartStopButton = props => {
             return false
         }
     })
-    const [time, setTime] = useState("")
+    const [time, setTime] = useState("");
+    const [currTime, setCurrTime] = useState("")
 
 
 
@@ -28,11 +29,18 @@ export const StartStopButton = props => {
         setTime(time)
 
         if (x == true) {
+            // Send first Time to LocalStorage
             localStorage.setItem("timeOne", JSON.stringify(time))
             localStorage.setItem("timeStatus", true)
         } else {
-            let test = JSON.parse(localStorage.getItem("timeOne"))
-            console.log("Primer time", test, "Segundo time", time)
+            const firstTime = JSON.parse(localStorage.getItem("timeOne"))
+            const secondTime = time
+            const currTime = fnCalTime({ firstTime, secondTime })
+            setCurrTime(currTime)
+            console.log("Primer time", firstTime, "Segundo time", secondTime, "Diferencia", currTime)
+
+
+            //Reseteo la Data en el Local.Storage
             localStorage.setItem("timeOne", "")
             localStorage.setItem("timeStatus", "")
         }
@@ -43,7 +51,7 @@ export const StartStopButton = props => {
     return (
 
 
-        <StartStopContext.Provider value={{ start, time }}>
+        <StartStopContext.Provider value={{ start, time, currTime }}>
 
             <div>
                 {start == false && <StartedButton onClick={() => { push(true) }}>Start</StartedButton>}

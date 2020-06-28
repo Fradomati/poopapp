@@ -35536,9 +35536,9 @@ exports.fnHourDay = fnHourDay;
 var fnCalTime = function fnCalTime(time) {
   var id = time.id; // Id User
 
-  var start = time.start; // Tiempo Inicio
+  var start = time.firstTime; // Tiempo Inicio
 
-  var end = time.end; // Tiempo End
+  var end = time.secondTime; // Tiempo End
 
   var hour = time.hour; // Hora
 
@@ -35695,6 +35695,11 @@ var StartStopButton = function StartStopButton(props) {
       time = _useState4[0],
       setTime = _useState4[1];
 
+  var _useState5 = (0, _react.useState)(""),
+      _useState6 = _slicedToArray(_useState5, 2),
+      currTime = _useState6[0],
+      setCurrTime = _useState6[1];
+
   var push = function push(x) {
     setStart(x);
     var day = (0, _Api_Timer.fnGetDay)();
@@ -35702,11 +35707,21 @@ var StartStopButton = function StartStopButton(props) {
     setTime(time);
 
     if (x == true) {
+      // Send first Time to LocalStorage
       localStorage.setItem("timeOne", JSON.stringify(time));
       localStorage.setItem("timeStatus", true);
     } else {
-      var test = JSON.parse(localStorage.getItem("timeOne"));
-      console.log("Primer time", test, "Segundo time", time);
+      var firstTime = JSON.parse(localStorage.getItem("timeOne"));
+      var secondTime = time;
+
+      var _currTime = (0, _Api_Timer.fnCalTime)({
+        firstTime: firstTime,
+        secondTime: secondTime
+      });
+
+      setCurrTime(_currTime);
+      console.log("Primer time", firstTime, "Segundo time", secondTime, "Diferencia", _currTime); //Reseteo la Data en el Local.Storage
+
       localStorage.setItem("timeOne", "");
       localStorage.setItem("timeStatus", "");
     }
@@ -35715,7 +35730,8 @@ var StartStopButton = function StartStopButton(props) {
   return /*#__PURE__*/_react.default.createElement(StartStopContext.Provider, {
     value: {
       start: start,
-      time: time
+      time: time,
+      currTime: currTime
     }
   }, /*#__PURE__*/_react.default.createElement("div", null, start == false && /*#__PURE__*/_react.default.createElement(_style.StartedButton, {
     onClick: function onClick() {
@@ -35760,7 +35776,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var Home = function Home(props) {
   var _useContext = (0, _react.useContext)(_index.StartStopContext),
       start = _useContext.start,
-      time = _useContext.time;
+      time = _useContext.time,
+      currTime = _useContext.currTime;
 
   var _useState = (0, _react.useState)("Nothing"),
       _useState2 = _slicedToArray(_useState, 2),
@@ -35773,7 +35790,7 @@ var Home = function Home(props) {
     }
   }, [time]);
   console.log(start);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", null, "Est\xE1s en la home"), /*#__PURE__*/_react.default.createElement("div", null, "Tiempos: ", timer));
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", null, "Est\xE1s en la home"), /*#__PURE__*/_react.default.createElement("div", null, "Tiempos: ", timer), currTime && /*#__PURE__*/_react.default.createElement("div", null, " Tu tiempo ha sido: ", currTime));
 };
 
 exports.Home = Home;
