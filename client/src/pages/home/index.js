@@ -17,7 +17,7 @@ export const Home = props => {
         <>
             <div>Estás en la home</div>
             <div>Tiempos: {timer}</div>
-            {currTime && < div > Tu tiempo ha sido: {currTime}</div>}
+            {currTime && < div > Tu tiempo ha sido: {currTime.hour}h: {currTime.min}m: {currTime.sec}s</div>}
         </>
     )
 }

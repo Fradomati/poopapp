@@ -35550,7 +35550,7 @@ var fnCalTime = function fnCalTime(time) {
   //   addTimer({ id: id, secs: totalSec, day: day, hour: hour }); // Envío los datos al back
 
   var mount = fnMountTime(totalSec);
-  return totalSec;
+  return mount;
 }; // Media Tiempo
 
 
@@ -35790,7 +35790,7 @@ var Home = function Home(props) {
     }
   }, [time]);
   console.log(start);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", null, "Est\xE1s en la home"), /*#__PURE__*/_react.default.createElement("div", null, "Tiempos: ", timer), currTime && /*#__PURE__*/_react.default.createElement("div", null, " Tu tiempo ha sido: ", currTime));
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", null, "Est\xE1s en la home"), /*#__PURE__*/_react.default.createElement("div", null, "Tiempos: ", timer), currTime && /*#__PURE__*/_react.default.createElement("div", null, " Tu tiempo ha sido: ", currTime.hour, "h: ", currTime.min, "m: ", currTime.sec, "s"));
 };
 
 exports.Home = Home;

@@ -97,7 +97,7 @@ export const fnCalTime = (time) => {
 
     const mount = fnMountTime(totalSec);
 
-    return totalSec;
+    return mount;
 };
 
 // Media Tiempo
