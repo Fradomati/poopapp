@@ -10,8 +10,14 @@ const UserModel = new Schema(
         lastTime: { type: Number, default: 0 },
         days: [{ type: Number }],
         hours: [{ type: Number }],
-        refContent: { type: Number, default: 0 },
+        refContent: [{ type: Schema.Types.ObjectId, ref: "Content" }],
         storeContent: { type: Array, default: [] },
+        likesContent: {
+            1: [{ type: Schema.Types.ObjectId, ref: "Content" }],
+            2: [{ type: Schema.Types.ObjectId, ref: "Content" }],
+            3: [{ type: Schema.Types.ObjectId, ref: "Content" }],
+            4: [{ type: Schema.Types.ObjectId, ref: "Content" }]
+        }
     },
     {
         timestamps: true,
