@@ -18,5 +18,5 @@ const ContentModel = new Schema(
         timestamps: true,
     }
 );
-const Content = mongoose.model("Content", Content);
+const Content = mongoose.model("Content", ContentModel);
 module.exports = Content;
