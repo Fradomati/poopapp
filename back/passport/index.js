@@ -1,5 +1,5 @@
 const passport = require("passport");
-const User = require("../models/User.Model");
+const User = require("../models/User_Model");
 
 // REQUIRE ALL STRATEGIES HERE!!!
 require("./strategies/local");

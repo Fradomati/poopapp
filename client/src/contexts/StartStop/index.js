@@ -9,10 +9,8 @@ export const StartStopButton = props => {
     const [start, setStart] = useState(() => {
         const status = localStorage.getItem("timeStatus")
         if (localStorage.getItem("timeStatus") == "true") {
-            console.log("Bla")
             return true
         } else {
-            console.log("Blue")
             return false
         }
     })

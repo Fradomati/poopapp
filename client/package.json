@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "@babel/plugin-transform-runtime": "^7.9.6",
+    "@babel/plugin-transform-runtime": "^7.10.4",
     "axios": "^0.19.2",
     "lodash": "^4.17.15",
     "parcel": "^1.12.4",
