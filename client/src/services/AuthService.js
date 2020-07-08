@@ -13,3 +13,13 @@ export const signupFn = async ({ email, password }) => {
     console.log("New register:", email, username, password)
     return response.data
 }
+
+export const loginFn = async ({ email, password }) => {
+    const response = await authService.post("/login", {
+        email,
+        password
+    })
+
+    console.log("Login user:", email, password)
+    return response.data
+}
