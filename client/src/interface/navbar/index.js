@@ -1,9 +1,14 @@
 import React from "react";
 import { NavContainer, UlNavbar, LiNavBar } from "./style"
 import { Link } from "react-router-dom"
+import { logoutFn } from "../../services/AuthService"
 
 
 export const Navbar = () => {
+
+    const doLogout = async () => {
+        await logoutFn();
+    }
 
     return (
         <NavContainer>
@@ -16,6 +21,11 @@ export const Navbar = () => {
                 </LiNavBar>
                 <LiNavBar>
                     <Link to="/login">Login</Link>
+                </LiNavBar>
+                <LiNavBar>
+                    <button onClick={() => {
+                        doLogout()
+                    }}>Logout</button>
                 </LiNavBar>
             </UlNavbar>
         </NavContainer>

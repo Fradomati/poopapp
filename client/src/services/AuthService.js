@@ -23,3 +23,9 @@ export const loginFn = async ({ email, password }) => {
     console.log("Login user:", email, password)
     return response.data
 }
+
+export const logoutFn = async () => {
+    const response = await authService.post("/logout");
+    console.log("[LOGOUT]", response.data);
+    return response.data;
+};

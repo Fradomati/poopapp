@@ -4,6 +4,7 @@ const _ = require("lodash");
 const router = express.Router();
 const User = require("../models/User_Model");
 const { hashPassword } = require("../lib/hashing")
+const { isLoggedIn } = require("../lib/loggedMidleware")
 
 
 
@@ -52,4 +53,15 @@ router.post("/login", (req, res) => {
         });
     })(req, res);
 });
+
+router.post("/logout", isLoggedIn(), async (req, res) => {
+    if (req.user) {
+        console.log(req.user);
+        req.logout();
+        return res.json({ status: "Logout OK" });
+    } else {
+        res.status(401).json({ status: "You are not logged" });
+    }
+});
+
 module.exports = router;
