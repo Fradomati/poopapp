@@ -20,7 +20,7 @@ export const loginFn = async ({ email, password }) => {
         password
     })
 
-    console.log("Login user:", email, password)
+    console.log("Login user:", email, password, response.data)
     return response.data
 }
 

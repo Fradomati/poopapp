@@ -1,13 +1,33 @@
 const express = require("express");
-const passport = require("passport");
-const _ = require("lodash");
 const router = express.Router();
 const User = require("../models/User_Model");
+const passport = require("passport");
+const _ = require("lodash");
 const { hashPassword } = require("../lib/hashing")
 const { isLoggedIn } = require("../lib/loggedMidleware")
 
 
 
+
+router.post("/login", (req, res) => {
+    passport.authenticate("local", (err, user, failureDetails) => {
+        console.log("LOCAL", user)
+        if (err) {
+            console.log("err:", err);
+            return res.json({ status: "Error en la Autentificación" });
+        }
+        console.log("el usuario", user);
+        if (!user) {
+            return res.json({ status: "No existe el usuario" });
+        }
+        req.login(user, (err) => {
+            if (err) {
+                return res.status(500).json({ status: "Sesión mal guardada" });
+            }
+            return res.json(req.user);
+        });
+    })(req, res)
+});
 
 router.post("/signup", async (req, res) => {
     const { email, username, password } = req.body;
@@ -35,26 +55,7 @@ router.post("/signup", async (req, res) => {
 });
 
 
-router.post("/login", (req, res) => {
-    passport.authenticate("local", (err, user, failureDetails) => {
-        if (err) {
-            console.log("err:", err);
-            return res.json({ status: "Error en la Autentificación" });
-        }
-        console.log(user);
-        if (!user) {
-            return res.json({ status: "No existe el usuario" });
-        }
-        req.login(user, (err) => {
-            if (err) {
-                return res.status(500).json({ status: "Sesión mal guardada" });
-            }
-            return res.json(req.user);
-        });
-    })(req, res);
-});
-
-router.post("/logout", isLoggedIn(), async (req, res) => {
+router.post("/logout", async (req, res) => {
     if (req.user) {
         console.log(req.user);
         req.logout();

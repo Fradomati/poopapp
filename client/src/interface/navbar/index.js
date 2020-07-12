@@ -23,9 +23,9 @@ export const Navbar = () => {
                     <Link to="/login">Login</Link>
                 </LiNavBar>
                 <LiNavBar>
-                    <button onClick={() => {
+                    <Link to="/" onClick={() => {
                         doLogout()
-                    }}>Logout</button>
+                    }}>Logout</Link>
                 </LiNavBar>
             </UlNavbar>
         </NavContainer>
