@@ -5,14 +5,14 @@ import { Home } from "../src/pages/home/index";
 import { Signup } from "../src/pages/auth/signup/index";
 import { Login } from "../src/pages/auth/login/index"
 
-import { UserInfoContext } from "./contexts/UserContext/index"
+import { UserInfoProvider } from "./contexts/UserContext/index"
 import { StartStopButton } from "./contexts/StartStop/index"
 
 
 export const App = () => {
     return (
         <Router>
-            <UserInfoContext>
+            <UserInfoProvider>
                 <Layout>
                     <StartStopButton>
                         <Switch>
@@ -22,7 +22,7 @@ export const App = () => {
                         </Switch>
                     </StartStopButton>
                 </Layout>
-            </UserInfoContext>
+            </UserInfoProvider>
         </Router>
 
     )

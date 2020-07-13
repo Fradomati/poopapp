@@ -1,17 +1,17 @@
-import React, { createContext, useState } from "react"
+import React, { createContext, useState } from "react";
 
 
 export const UserInfoContext = createContext();
 
 export const UserInfoProvider = props => {
 
-    const [userOn, setUserOn] = useState()
+    const [userOn, setUserOn] = useState(null)
 
     return (
 
-        <UserContext.Provider value={{ userOn, setUserOn }}>
+        <UserInfoContext.Provider value={{ userOn, setUserOn }}>
             {props.children}
-        </UserContext.Provider>
+        </UserInfoContext.Provider>
     )
 
 }

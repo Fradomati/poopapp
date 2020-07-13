@@ -17,7 +17,7 @@ export const Navbar = () => {
     return (
         <NavContainer>
             <UlNavbar>
-                {!userOn && (
+                {userOn && (
                     <LiNavBar>
                         <Link to="/">Home</Link>
                     </LiNavBar>
