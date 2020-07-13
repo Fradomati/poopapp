@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavContainer, UlNavbar, LiNavBar } from "./style"
 import { Link } from "react-router-dom"
 import { logoutFn } from "../../services/AuthService"
 
+import { UserInfoContext } from "../../contexts/UserContext/index"
+
 
 export const Navbar = () => {
+
+    const { userOn } = useContext(UserInfoContext)
 
     const doLogout = async () => {
         await logoutFn();
@@ -13,9 +17,11 @@ export const Navbar = () => {
     return (
         <NavContainer>
             <UlNavbar>
-                <LiNavBar>
-                    <Link to="/">Home</Link>
-                </LiNavBar>
+                {!userOn && (
+                    <LiNavBar>
+                        <Link to="/">Home</Link>
+                    </LiNavBar>
+                )}
                 <LiNavBar>
                     <Link to="/signup">Signup</Link>
                 </LiNavBar>

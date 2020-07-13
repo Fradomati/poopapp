@@ -24,7 +24,19 @@ router.post("/login", (req, res) => {
             if (err) {
                 return res.status(500).json({ status: "Sesión mal guardada" });
             }
-            return res.json(req.user);
+            return res.json(_.pick(req.user, [
+                "_id",
+                "username",
+                "password",
+                "email",
+                "totalTimes",
+                "lastTime",
+                "days",
+                "hours",
+                "refContent",
+                "storeContent",
+                "likesContent"
+            ]));
         });
     })(req, res)
 });
