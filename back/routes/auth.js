@@ -14,11 +14,11 @@ router.post("/login", (req, res) => {
         console.log("LOCAL", user)
         if (err) {
             console.log("err:", err);
-            return res.json({ status: "Error en la Autentificación" });
+            return res.json({ status: 417, message: "El email o la contraseña son incorrectos" });
         }
         console.log("el usuario", user);
         if (!user) {
-            return res.json({ status: "No existe el usuario" });
+            return res.json({ status: 417, message: "El email o la contraseña son incorrectos" });
         }
         req.login(user, (err) => {
             if (err) {
@@ -55,14 +55,14 @@ router.post("/signup", async (req, res) => {
             password: hashPassword(password),
         });
         console.log("Register", username, "done")
-        res.json({ status: `${username} register` })
+        res.json({ status: 200, message: `${username} register` })
         // req.logIn(newUser, (err) => {
         //     res.json(
         //         _.pick(req.user, ["username", "_id", "createdAt", "updatedAt"])
         //     );
         // });
     } else {
-        res.json({ status: "User Exist, try again!" });
+        res.json({ status: 417, message: `Ya existe este usuario` });
     }
 });
 

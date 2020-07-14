@@ -2,38 +2,50 @@ import React, { useContext } from "react";
 import { NavContainer, UlNavbar, LiNavBar } from "./style"
 import { Link } from "react-router-dom"
 import { logoutFn } from "../../services/AuthService"
+import { withRouter } from "react-router-dom"
 
 import { UserInfoContext } from "../../contexts/UserContext/index"
 
 
-export const Navbar = () => {
+export const Navbar = withRouter(({ history }) => {
 
-    const { userOn } = useContext(UserInfoContext)
+    const { userOn, setUserOn } = useContext(UserInfoContext)
 
     const doLogout = async () => {
         await logoutFn();
+        setUserOn(null)
+        history.push("/login")
     }
 
     return (
         <NavContainer>
             <UlNavbar>
-                {userOn && (
-                    <LiNavBar>
-                        <Link to="/">Home</Link>
-                    </LiNavBar>
+                <LiNavBar>
+                    <Link to="/" >Home</Link>
+                </LiNavBar>
+                {!userOn && (
+                    <>
+                        <LiNavBar>
+                            <Link to="/signup" >Signup</Link>
+                        </LiNavBar>
+                        <LiNavBar>
+                            <Link to="/login" >Login</Link>
+                        </LiNavBar>
+                    </>
                 )}
-                <LiNavBar>
-                    <Link to="/signup">Signup</Link>
-                </LiNavBar>
-                <LiNavBar>
-                    <Link to="/login">Login</Link>
-                </LiNavBar>
-                <LiNavBar>
-                    <Link to="/" onClick={() => {
-                        doLogout()
-                    }}>Logout</Link>
-                </LiNavBar>
+                {userOn && (
+                    <>
+                        <LiNavBar>
+                            <Link to="/" > ¡Hola! {userOn.username} </Link>
+                        </LiNavBar>
+                        <LiNavBar>
+                            <Link to="/" onClick={() => {
+                                doLogout()
+                            }} >Logout</Link>
+                        </LiNavBar>
+                    </>
+                )}
             </UlNavbar>
         </NavContainer>
     )
-}
+})
