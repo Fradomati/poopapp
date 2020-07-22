@@ -5,6 +5,8 @@ const passport = require("passport");
 const _ = require("lodash");
 const { hashPassword } = require("../lib/hashing")
 const { isLoggedIn } = require("../lib/loggedMidleware")
+const { sendEmail } = require("../lib/sendEmails")
+
 
 
 
@@ -54,6 +56,7 @@ router.post("/signup", async (req, res) => {
             username,
             password: hashPassword(password),
         });
+        sendEmail(email)
         console.log("Register", username, "done")
         res.json({ status: 200, message: `${username} register` })
         // req.logIn(newUser, (err) => {
