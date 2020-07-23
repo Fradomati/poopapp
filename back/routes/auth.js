@@ -6,6 +6,7 @@ const _ = require("lodash");
 const { hashPassword } = require("../lib/hashing")
 const { isLoggedIn } = require("../lib/loggedMidleware")
 const { sendEmail } = require("../lib/sendEmails")
+const { passWordGenerator } = require("../lib/automaticGenerator")
 
 
 
@@ -56,7 +57,8 @@ router.post("/signup", async (req, res) => {
             username,
             password: hashPassword(password),
         });
-        sendEmail(email)
+        // SEND WELCOME EMAIL
+        sendEmail(email, "welcome")
         console.log("Register", username, "done")
         res.json({ status: 200, message: `${username} register` })
         // req.logIn(newUser, (err) => {
@@ -69,6 +71,26 @@ router.post("/signup", async (req, res) => {
     }
 });
 
+router.post("/forgotPassWord", async (req, res) => {
+    const { email } = req.body
+    const existUser = await User.findOne({ email });
+
+    if (!existUser) {
+        res.json({ status: 417, message: `Este usuario no existe` })
+    } else {
+        const newPassWord = passWordGenerator()
+        const id = existUser._id
+        await User.findByIdAndUpdate(
+            { _id: id },
+            { $set: { password: hashPassword(newPassWord) } }
+        )
+
+        sendEmail(email, "forgot", newPassWord)
+
+        res.json({ status: 200, message: `Enviamos nueva contraseña ${newPassWord}` })
+    }
+})
+
 
 router.post("/logout", async (req, res) => {
     if (req.user) {
@@ -79,5 +101,6 @@ router.post("/logout", async (req, res) => {
         res.status(401).json({ status: "You are not logged" });
     }
 });
+
 
 module.exports = router;

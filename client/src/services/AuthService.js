@@ -31,3 +31,9 @@ export const logoutFn = async () => {
     console.log("[LOGOUT]", response.data);
     return response.data;
 };
+
+
+export const forgotFN = async ({ email }) => {
+    const response = await authService.post("/forgotPassWord", { email })
+    return response.data
+}
