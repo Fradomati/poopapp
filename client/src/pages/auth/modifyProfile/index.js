@@ -1,13 +1,14 @@
 import React, { useState, useContext } from "react";
 import { useForm } from 'react-hook-form';
 import { modifyFN } from "../../../services/AuthService"
+import { withProtected } from "../../../../lib/Protect/index"
 
 import { UserInfoContext } from "../../../contexts/UserContext/index"
 
 
 
 
-export const ModifyProfile = () => {
+export const ModifyProfile = withProtected(() => {
 
     const { userOn, setUserOn } = useContext(UserInfoContext)
     const [changeUser, setChangeUser] = useState(null)
@@ -84,4 +85,4 @@ export const ModifyProfile = () => {
 
         </>
     )
-}
+})
