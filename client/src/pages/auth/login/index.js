@@ -34,7 +34,7 @@ export const Login = withRouter(({ history }) => {
     return (
         <>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <input type="text" placeholder="Email" name="email" ref={register({
+                <input type="text" placeholder="Email" name="mail" ref={register({
                     required: true, pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i
                 })} />
 

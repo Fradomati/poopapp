@@ -39,7 +39,7 @@ const sendEmail = (email, type, newpassword = null,) => {
                 response = {
                     from: 'Poopapp: Nueva Contraseña <yourpoopapp@gmail.com>',
                     to: email,
-                    subject: 'Welcome!',
+                    subject: 'Cambio de Contraseña',
                     text: `Tu nueva contraseña es ${newpassword}`,
                 }
                 break;

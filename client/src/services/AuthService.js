@@ -4,7 +4,9 @@ import { getUserName } from "../../lib/Signup/Signup_Username"
 
 
 
-export const signupFn = async ({ email, password }) => {
+export const signupFn = async ({ mail, password }) => {
+    let email = mail.toLowerCase()
+    console.log("Registro Minúsculas", email)
     const username = getUserName(email) // Get username from email
     const response = await authService.post("/signup", {
         email,
@@ -16,7 +18,8 @@ export const signupFn = async ({ email, password }) => {
     return response.data
 }
 
-export const loginFn = async ({ email, password }) => {
+export const loginFn = async ({ mail, password }) => {
+    let email = mail.toLowerCase()
     const response = await authService.post("/login", {
         email,
         password
@@ -33,7 +36,29 @@ export const logoutFn = async () => {
 };
 
 
-export const forgotFN = async ({ email }) => {
+export const forgotFN = async ({ mail }) => {
+    let email = mail.toLowerCase()
     const response = await authService.post("/forgotPassWord", { email })
     return response.data
+}
+
+export const modifyFN = async (data) => {
+
+    if (data.username) {
+        const response = await authService.post("/modifyProfile", { username })
+        return response.data
+    }
+
+    if (data.mail) {
+        let mail = data.mail
+        let email = mail.toLowerCase()
+        const response = await authService.post("/modifyProfile", { email })
+        return response.data
+    }
+
+    if (data.password) {
+        const response = await authService.post("/modifyProfile", { password })
+        return response.data
+    }
+
 }

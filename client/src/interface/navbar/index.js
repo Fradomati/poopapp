@@ -36,7 +36,7 @@ export const Navbar = withRouter(({ history }) => {
                 {userOn && (
                     <>
                         <LiNavBar>
-                            <Link to="/" > ¡Hola! {userOn.username} </Link>
+                            <Link to="/profile" > ¡Hola! {userOn.username} </Link>
                         </LiNavBar>
                         <LiNavBar>
                             <Link to="/" onClick={() => {
