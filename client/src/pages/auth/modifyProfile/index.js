@@ -22,12 +22,17 @@ export const ModifyProfile = () => {
         }
     );
     const onSubmit = async (data) => {
-        const responseServer = await modifyFN(data);
+        const id = userOn._id
+        const responseServer = await modifyFN(data, id);
 
         if (responseServer.status == 417) {
             setErr(responseServer.message)
         } else {
             setUserOn(responseServer)
+            if (changeUser == true) setChangeUser(null)
+            if (changeEmail == true) setChangeEmail(null)
+            if (changePass == true) setChangePass(null)
+
         }
     };
 
@@ -54,6 +59,7 @@ export const ModifyProfile = () => {
                         <input type="text" placeholder={userOn.username} name="username" ref={register({
                             required: true
                         })} />
+                        <input type="submit" />
                     </form>
                 )}
                 <li>Email: {userOn.email} <button onClick={() => modify("Email")}>Modificar</button></li>
@@ -62,6 +68,7 @@ export const ModifyProfile = () => {
                         <input type="text" placeholder={userOn.email} name="mail" ref={register({
                             required: true, pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i
                         })} />
+                        <input type="submit" />
                     </form>
                 )}
                 <li>¿Quieres cambiar la contraseña? <button onClick={() => modify("Pass")}>Modificar</button></li>
@@ -70,6 +77,7 @@ export const ModifyProfile = () => {
                         <input type="text" placeholder="********" name="password" ref={register({
                             required: true
                         })} />
+                        <input type="submit" />
                     </form>
                 )}
             </ul>

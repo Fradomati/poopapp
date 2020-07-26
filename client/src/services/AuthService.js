@@ -42,22 +42,24 @@ export const forgotFN = async ({ mail }) => {
     return response.data
 }
 
-export const modifyFN = async (data) => {
+export const modifyFN = async (data, id) => {
 
     if (data.username) {
-        const response = await authService.post("/modifyProfile", { username })
+        const username = data.username
+        const response = await authService.post("/modifyProfile", { id, username })
         return response.data
     }
 
     if (data.mail) {
         let mail = data.mail
         let email = mail.toLowerCase()
-        const response = await authService.post("/modifyProfile", { email })
+        const response = await authService.post("/modifyProfile", { id, email })
         return response.data
     }
 
     if (data.password) {
-        const response = await authService.post("/modifyProfile", { password })
+        const password = data.password
+        const response = await authService.post("/modifyProfile", { id, password })
         return response.data
     }
 

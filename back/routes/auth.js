@@ -92,6 +92,48 @@ router.post("/forgotPassWord", async (req, res) => {
 })
 
 
+router.post("/modifyProfile", async (req, res) => {
+    const { id } = req.body
+    const { username, email, password } = req.body
+    if (username != null) {
+        await User.findByIdAndUpdate(
+            { _id: id },
+            { $set: { username: username } }
+        )
+
+    }
+    if (email != null) {
+        await User.findByIdAndUpdate(
+            { _id: id },
+            { $set: { email: email } }
+        )
+
+    }
+    if (password != null) {
+        await User.findByIdAndUpdate(
+            { _id: id },
+            { $set: { password: hashPassword(password) } }
+        )
+    }
+
+    const changes = await User.findById(id)
+
+    res.json(_.pick(changes, [
+        "_id",
+        "username",
+        "password",
+        "email",
+        "totalTimes",
+        "lastTime",
+        "days",
+        "hours",
+        "refContent",
+        "storeContent",
+        "likesContent"
+    ]))
+
+})
+
 router.post("/logout", async (req, res) => {
     if (req.user) {
         console.log(req.user);
