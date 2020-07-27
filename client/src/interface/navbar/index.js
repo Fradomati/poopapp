@@ -20,9 +20,12 @@ export const Navbar = withRouter(({ history }) => {
     return (
         <NavContainer>
             <UlNavbar>
-                <LiNavBar>
-                    <Link to="/" >Home</Link>
-                </LiNavBar>
+                {userOn && (
+                    <LiNavBar>
+                        <Link to="/" >Home</Link>
+                    </LiNavBar>
+                )
+                }
                 {!userOn && (
                     <>
                         <LiNavBar>

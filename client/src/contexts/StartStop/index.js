@@ -1,10 +1,13 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import { StartedButton, StoppedButton } from "./style"
 import { fnGetDay, fnGetTime, fnCalTime } from "../../../lib/ApiFiles/Api_Timer"
+import { UserInfoContext } from "../../contexts/UserContext/index"
 
 export const StartStopContext = createContext();
 
 export const StartStopButton = props => {
+    const { userOn } = useContext(UserInfoContext)
+
 
     const [start, setStart] = useState(() => {
         const status = localStorage.getItem("timeStatus")
@@ -51,10 +54,12 @@ export const StartStopButton = props => {
 
         <StartStopContext.Provider value={{ start, time, currTime }}>
 
-            <div>
-                {start == false && <StartedButton onClick={() => { push(true) }}>Start</StartedButton>}
-                {start == true && <StoppedButton onClick={() => { push(false) }}>Stop</StoppedButton>}
-            </div>
+            {userOn && (
+                <div>
+                    {start == false && <StartedButton onClick={() => { push(true) }}>Start</StartedButton>}
+                    {start == true && <StoppedButton onClick={() => { push(false) }}>Stop</StoppedButton>}
+                </div>
+            )}
 
             {props.children}
         </StartStopContext.Provider>
