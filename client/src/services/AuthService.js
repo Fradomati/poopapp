@@ -42,6 +42,11 @@ export const forgotFN = async ({ mail }) => {
     return response.data
 }
 
+export const whoameFN = async () => {
+    const response = await authService.post("/whoame")
+    return response.data
+}
+
 export const modifyFN = async (data, id) => {
 
     if (data.username) {

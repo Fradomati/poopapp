@@ -134,6 +134,28 @@ router.post("/modifyProfile", async (req, res) => {
 
 })
 
+router.post("/whoame", (req, res) => {
+    if (req.user) {
+        return res.json(
+            _.pick(req.user, [
+                "_id",
+                "username",
+                "password",
+                "email",
+                "totalTimes",
+                "lastTime",
+                "days",
+                "hours",
+                "refContent",
+                "storeContent",
+                "likesContent"
+            ])
+        );
+    } else {
+        return res.status(401).json({ status: "No user session found" });
+    }
+});
+
 router.post("/logout", async (req, res) => {
     if (req.user) {
         console.log(req.user);
