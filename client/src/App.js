@@ -6,12 +6,12 @@ import { Signup } from "../src/pages/auth/signup/index";
 import { Login } from "../src/pages/auth/login/index"
 import { ForgotPassword } from "../src/pages/auth/forgotPW/index"
 import { ModifyProfile } from "../src/pages/auth/modifyProfile/index"
-
+import { withAuthentication } from "../lib/Authentication/withAuthentication"
 import { UserInfoProvider } from "./contexts/UserContext/index"
 import { StartStopButton } from "./contexts/StartStop/index"
 
 
-export const App = () => {
+export const App = withAuthentication(() => {
     return (
         <Router>
             <UserInfoProvider>
@@ -30,4 +30,4 @@ export const App = () => {
         </Router>
 
     )
-}
+})
