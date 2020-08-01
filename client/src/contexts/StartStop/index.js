@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import { StartedButton, StoppedButton } from "./style"
 import { fnGetDay, fnGetTime, fnCalTime } from "../../../lib/ApiFiles/Api_Timer"
 import { UserInfoContext } from "../../contexts/UserContext/index"
+import { sendTimeFN } from "../../services/DataService"
 
 export const StartStopContext = createContext();
 
@@ -37,7 +38,11 @@ export const StartStopButton = props => {
             const firstTime = JSON.parse(localStorage.getItem("timeOne"))
             const secondTime = time
             const currTime = fnCalTime({ firstTime, secondTime })
-            setCurrTime(currTime)
+            setCurrTime(currTime.mount)
+
+            //Send seconds to back
+            sendTimeFN({ id: userOn._id, seconds: currTime.totalSec })
+            console.log("Segundos Totales:", currTime.totalSec)
             console.log("Primer time", firstTime, "Segundo time", secondTime, "Diferencia", currTime)
 
 
