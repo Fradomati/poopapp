@@ -23,6 +23,7 @@ export const Login = withRouter(({ history }) => {
             setErr(responseServer.message)
         } else {
             setUserOn(responseServer)
+            localStorage.setItem("sessionOn", true)
             history.push("/")
         }
     };

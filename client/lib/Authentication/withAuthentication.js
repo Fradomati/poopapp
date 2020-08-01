@@ -1,16 +1,19 @@
-import React, { useState, useEffect, Children } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import { whoameFN } from "../../src/services/AuthService"
-import { UserSessionContext, UserSessionProvider } from "../../src/contexts/UserSession/index.js"
+
+export const UserSessionContext = createContext();
+
+
 export const withAuthentication = (Component) => () => {
-    const [userSession, setUserSession] = useState()
     const [loading, setLoading] = useState(true);
+    const [userSession, setUserSession] = useState()
 
     useEffect(() => {
         console.log("Welcome guy :)");
         whoameFN()
             .then((user) => {
                 console.log(`Welcome again user ${user.username}`);
-                setUserSession(user);
+                setUserSession(user)
             })
             .catch((e) => {
                 console.log("No user logged in");
@@ -19,9 +22,9 @@ export const withAuthentication = (Component) => () => {
     }, []);
 
     return (
-        <User value={{ userSession }}>
+        <UserSessionContext.Provider value={{ userSession }}>
             {loading && (<p>Cargando...</p>)}
             <Component />
-        </Session>
+        </UserSessionContext.Provider>
     );
 };

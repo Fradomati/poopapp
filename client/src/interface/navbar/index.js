@@ -14,6 +14,7 @@ export const Navbar = withRouter(({ history }) => {
     const doLogout = async () => {
         await logoutFn();
         setUserOn(null)
+        localStorage.setItem("sessionOn", "")
         history.push("/login")
     }
 

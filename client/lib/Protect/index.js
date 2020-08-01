@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { UserInfoContext } from "../../src/contexts/UserContext/index"
 
@@ -7,6 +7,8 @@ import { UserInfoContext } from "../../src/contexts/UserContext/index"
 export const withProtected = (Component) => () => {
 
     const { userOn } = useContext(UserInfoContext);
+
+
 
 
     if (userOn) {

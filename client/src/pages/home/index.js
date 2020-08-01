@@ -8,6 +8,10 @@ export const Home = props => {
     const { userOn } = useContext(UserInfoContext)
     const [timer, setTimer] = useState("Nothing")
 
+
+    // Check session on
+    const session = localStorage.getItem("sessionOn")
+
     useEffect(() => {
         if (time != "") {
             setTimer(`Hour: ${time.hour}, Min: ${time.min}, Sec: ${time.sec}`)
@@ -15,7 +19,7 @@ export const Home = props => {
     }, [time])
 
     console.log(start)
-    if (userOn) {
+    if (session) {
 
         return (
             <>
