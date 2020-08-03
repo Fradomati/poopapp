@@ -8,7 +8,8 @@ import { whoameFN } from "../../services/AuthService"
 export const StartStopContext = createContext();
 
 export const StartStopButton = props => {
-    const { userOn, setUserOn } = useContext(UserInfoContext)
+    const { userOn, setUserOn, setUserSession } = useContext(UserInfoContext)
+    const { updateUser, setUpdateUser } = useState({ userOn })
 
 
     const [start, setStart] = useState(() => {
@@ -43,6 +44,9 @@ export const StartStopButton = props => {
 
             //Send seconds, hour, day, lastTime to back
             sendTimeFN({ id: userOn._id, seconds: currTime.totalSec, day: day, hour: hour, lastTime: currTime })
+                .then(update => {
+                    setUserOn(update)
+                })
             console.log("Segundos Totales:", currTime.totalSec)
             console.log("Primer time", firstTime, "Segundo time", secondTime, "Diferencia", currTime)
             //Reseteo la Data en el Local.Storage
@@ -50,17 +54,16 @@ export const StartStopButton = props => {
             localStorage.setItem("timeStatus", "")
 
         }
-
     }
 
-    useEffect(() => {
-        async function up() {
-            const update = await whoameFN()
-            setUserOn(update)
-            console.log(userOn)
-        }
-        up()
-    }, [currTime])
+    // useEffect(() => {
+    //     async function up() {
+    //         const update = await whoameFN()
+    //         setUserOn(update)
+    //         console.log(userOn)
+    //     }
+    //     up()
+    // }, [currTime])
 
 
     return (

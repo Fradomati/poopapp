@@ -22,7 +22,7 @@ export const withAuthentication = (Component) => () => {
     }, []);
 
     return (
-        <UserSessionContext.Provider value={{ userSession }}>
+        <UserSessionContext.Provider value={{ userSession, setUserSession }}>
             {loading && (<p>Cargando...</p>)}
             <Component />
         </UserSessionContext.Provider>

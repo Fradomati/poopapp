@@ -6,7 +6,7 @@ export const UserInfoContext = createContext();
 
 export const UserInfoProvider = (props) => {
 
-    const { userSession } = useContext(UserSessionContext)
+    const { userSession, setUserSession } = useContext(UserSessionContext)
     const [userOn, setUserOn] = useState(null)
 
     useEffect(() => {
@@ -18,7 +18,7 @@ export const UserInfoProvider = (props) => {
 
     return (
 
-        <UserInfoContext.Provider value={{ userOn, setUserOn }}>
+        <UserInfoContext.Provider value={{ userOn, setUserOn, setUserSession }}>
             {props.children}
         </UserInfoContext.Provider>
     )

@@ -16,7 +16,22 @@ router.post("/sendTime", async (req, res) => {
             }
         },
     )
-    res.json({ status: 200, message: `Enviamos ${seconds} segundos y los guardamos` })
+
+    const update = await User.findById(id)
+
+    res.json(_.pick(update, [
+        "_id",
+        "username",
+        "password",
+        "email",
+        "totalTimes",
+        "lastTime",
+        "days",
+        "hours",
+        "refContent",
+        "storeContent",
+        "likesContent"
+    ]))
 })
 
 

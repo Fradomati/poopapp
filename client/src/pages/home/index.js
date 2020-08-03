@@ -18,6 +18,8 @@ export const Home = props => {
         }
     }, [time])
 
+    const day = userOn?.totalTimes[userOn?.totalTimes.length - 1]
+
     console.log(start)
     if (session) {
 
@@ -26,7 +28,7 @@ export const Home = props => {
                 <div>Estás en la home</div>
                 <div>Tiempos: {timer}</div>
                 {currTime && < div > Tu tiempo ha sido: {currTime.hour}h: {currTime.min}m: {currTime.sec}s</div>}
-                <div>Tiempo Medio:</div>
+                <div>Tiempo Medio:{day}</div>
                 <div>Última vez:</div>
                 <div>Tiempo Total:</div>
                 <div>Día Favorito:</div>
