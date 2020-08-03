@@ -3,11 +3,12 @@ import { StartedButton, StoppedButton } from "./style"
 import { fnGetDay, fnGetTime, fnCalTime } from "../../../lib/ApiFiles/Api_Timer"
 import { UserInfoContext } from "../../contexts/UserContext/index"
 import { sendTimeFN } from "../../services/DataService"
+import { whoameFN } from "../../services/AuthService"
 
 export const StartStopContext = createContext();
 
 export const StartStopButton = props => {
-    const { userOn } = useContext(UserInfoContext)
+    const { userOn, setUserOn } = useContext(UserInfoContext)
 
 
     const [start, setStart] = useState(() => {
@@ -20,8 +21,7 @@ export const StartStopButton = props => {
     })
     const [time, setTime] = useState("");
     const [currTime, setCurrTime] = useState("")
-
-
+    const [newTime, setNewTime] = useState(null)
 
 
     const push = x => {
@@ -29,29 +29,38 @@ export const StartStopButton = props => {
         let day = fnGetDay()
         let time = fnGetTime()
         setTime(time)
-
         if (x == true) {
             // Send first Time to LocalStorage
             localStorage.setItem("timeOne", JSON.stringify(time))
             localStorage.setItem("timeStatus", true)
+
         } else {
             const firstTime = JSON.parse(localStorage.getItem("timeOne"))
             const secondTime = time
             const currTime = fnCalTime({ firstTime, secondTime })
+            const hour = firstTime.hour // Hora de inicio
             setCurrTime(currTime.mount)
 
-            //Send seconds to back
-            sendTimeFN({ id: userOn._id, seconds: currTime.totalSec })
+            //Send seconds, hour, day, lastTime to back
+            sendTimeFN({ id: userOn._id, seconds: currTime.totalSec, day: day, hour: hour, lastTime: currTime })
             console.log("Segundos Totales:", currTime.totalSec)
             console.log("Primer time", firstTime, "Segundo time", secondTime, "Diferencia", currTime)
-
-
             //Reseteo la Data en el Local.Storage
             localStorage.setItem("timeOne", "")
             localStorage.setItem("timeStatus", "")
+
         }
 
     }
+
+    useEffect(() => {
+        async function up() {
+            const update = await whoameFN()
+            setUserOn(update)
+            console.log(userOn)
+        }
+        up()
+    }, [currTime])
 
 
     return (
