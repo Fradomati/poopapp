@@ -35,7 +35,6 @@ export const fnDayWeek = (days) => {
     const sum = fnSum(days);
     const half = sum / days.length;
 
-    console.log(Math.floor(half), "|||||||||||||||||||||||||||||");
     switch (Math.floor(half)) {
         case 1:
             return "Lunes";
@@ -112,6 +111,7 @@ export const fnSumTime = (time) => {
 };
 
 export const fnHalfTime = (time) => {
+    console.log(time)
     let count = time.length;
     let sum = fnSum(time);
     let half = sum / count;
