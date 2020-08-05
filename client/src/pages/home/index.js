@@ -4,6 +4,11 @@ import { UserInfoContext } from "../../contexts/UserContext/index"
 import { Redirect } from "react-router-dom";
 import { fnHalfTime, fnSumTime, fnDayWeek, fnHourDay, fnMountTime } from "../../../lib/ApiFiles/Api_Timer"
 
+// Styles
+
+import { MainSection, Section, HightData, TitleData, Data, TimeDetails } from "./style"
+import { Container } from "../globalStyles"
+
 export const Home = props => {
 
     const { start, time, currTime } = useContext(StartStopContext)
@@ -57,16 +62,23 @@ export const Home = props => {
     if (session) {
 
         return (
-            <>
-                <div>Estás en la home</div>
-                <div>Tiempos: {timer}</div>
-                {currTime && < div > Tu tiempo ha sido: {currTime.hour}h: {currTime.min}m: {currTime.sec}s</div>}
-                <div>Última vez: {lastTime.hour}h - {lastTime.min}m - {lastTime.sec}s</div>
-                <div>Tiempo Medio: {halfTime.hour}h - {halfTime.min}m - {halfTime.sec}s</div>
-                <div>Tiempo Total: {totalTime.hour}h - {totalTime.min}m - {totalTime.sec}s</div>
-                <div>Día Favorito: {favDay}</div>
-                <div>Hora Favorita: {favHour}</div>
-            </>
+            <Container>
+                <MainSection>
+                    <Section>
+                        <HightData><TitleData>Tiempos:</TitleData> <Data>{timer}</Data></HightData>
+                        {currTime && < HightData > <TitleData>Tu tiempo ha sido:</TitleData> <Data>{currTime.hour}<TimeDetails>h</TimeDetails> {currTime.min}<TimeDetails>m</TimeDetails> {currTime.sec}<TimeDetails>s</TimeDetails></Data></HightData>}
+                    </Section>
+                    <Section>
+                        <HightData><TitleData>Última vez</TitleData> <Data>{lastTime.hour}<TimeDetails>h</TimeDetails> {lastTime.min}<TimeDetails>m</TimeDetails> {lastTime.sec}<TimeDetails>s</TimeDetails></Data></HightData>
+                        <HightData><TitleData>Tiempo Medio</TitleData> <Data>{halfTime.hour}<TimeDetails>h</TimeDetails> {halfTime.min}<TimeDetails>m</TimeDetails> {halfTime.sec}<TimeDetails>s</TimeDetails></Data></HightData>
+                        <HightData><TitleData>Tiempo Total</TitleData> <Data>{totalTime.hour}<TimeDetails>h</TimeDetails> {totalTime.min}<TimeDetails>m</TimeDetails> {totalTime.sec}<TimeDetails>s</TimeDetails></Data></HightData>
+                    </Section>
+                    <Section>
+                        <HightData><TitleData>Día Favorito</TitleData> <Data>{favDay}</Data></HightData>
+                        <HightData><TitleData>Hora Favorita</TitleData> <Data>{favHour}</Data></HightData>
+                    </Section>
+                </MainSection>
+            </Container>
         )
     } else {
         return <Redirect to="/login" />
