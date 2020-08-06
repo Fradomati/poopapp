@@ -1,9 +1,12 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { StartedButton, StoppedButton } from "./style"
 import { fnGetDay, fnGetTime, fnCalTime } from "../../../lib/ApiFiles/Api_Timer"
 import { UserInfoContext } from "../../contexts/UserContext/index"
 import { sendTimeFN } from "../../services/DataService"
 import { whoameFN } from "../../services/AuthService"
+
+// Styles
+import { StartedButton, StoppedButton, MainContainer } from "./style"
+
 
 export const StartStopContext = createContext();
 
@@ -72,10 +75,11 @@ export const StartStopButton = props => {
         <StartStopContext.Provider value={{ start, time, currTime }}>
 
             {userOn && (
-                <div>
+                <MainContainer>
                     {start == false && <StartedButton onClick={() => { push(true) }}>Start</StartedButton>}
                     {start == true && <StoppedButton onClick={() => { push(false) }}>Stop</StoppedButton>}
-                </div>
+                    <div><p>Welcome!</p><p>{userOn.username}</p></div>
+                </MainContainer>
             )}
 
             {props.children}

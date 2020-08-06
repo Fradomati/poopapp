@@ -1,9 +1,15 @@
 import styled from "styled-components";
 
+// Mobile
+
 export const NavContainer = styled.div`
 display: flex;
+align-items: center;
 width: 100%;
-
+height: 5vh;
+background-color: #2EC4B6;
+position: fixed;
+bottom: 0;
 `;
 
 export const UlNavbar = styled.ul`

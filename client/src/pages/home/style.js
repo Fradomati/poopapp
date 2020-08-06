@@ -8,13 +8,15 @@ width: 100%;
 `
 export const Section = styled.div`
 display: flex;
-justify-content: center;
+justify-content: space-evenly;
 align-items: center;
-background-color: #393e46;
+background-color: #2EC4B6;
 border-radius: 0;
 height: 20vh;
-width: 45%;
-margin-top: 2em
+width: 90%;
+margin-top: 1.5em;
+border: 3px solid #00b7c28a;
+border-radius: 10px;
 `
 
 export const HightData = styled.div`
@@ -23,12 +25,13 @@ width: 30%;
 `
 
 export const TitleData = styled.p`
-font-size: 1.3em;
-margin-bottom: 0.8em;
-color: #00ADB5
+font-size: 1.1em;
+margin-top: 0.8em;
+color: #011627;
 `
 export const Data = styled.p`
-font-size: 1.3em;
+font-size: 1.7em;
+color: #EFFFE9;
 `
 export const TimeDetails = styled.span`
 font-size: 0.65em

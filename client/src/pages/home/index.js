@@ -65,17 +65,16 @@ export const Home = props => {
             <Container>
                 <MainSection>
                     <Section>
-                        <HightData><TitleData>Tiempos:</TitleData> <Data>{timer}</Data></HightData>
-                        {currTime && < HightData > <TitleData>Tu tiempo ha sido:</TitleData> <Data>{currTime.hour}<TimeDetails>h</TimeDetails> {currTime.min}<TimeDetails>m</TimeDetails> {currTime.sec}<TimeDetails>s</TimeDetails></Data></HightData>}
+                        <HightData> {currTime && <Data>{currTime.hour}<TimeDetails>h</TimeDetails> {currTime.min}<TimeDetails>m</TimeDetails> {currTime.sec}<TimeDetails>s</TimeDetails></Data>}<TitleData>Actual</TitleData></HightData>
                     </Section>
                     <Section>
-                        <HightData><TitleData>Última vez</TitleData> <Data>{lastTime.hour}<TimeDetails>h</TimeDetails> {lastTime.min}<TimeDetails>m</TimeDetails> {lastTime.sec}<TimeDetails>s</TimeDetails></Data></HightData>
-                        <HightData><TitleData>Tiempo Medio</TitleData> <Data>{halfTime.hour}<TimeDetails>h</TimeDetails> {halfTime.min}<TimeDetails>m</TimeDetails> {halfTime.sec}<TimeDetails>s</TimeDetails></Data></HightData>
-                        <HightData><TitleData>Tiempo Total</TitleData> <Data>{totalTime.hour}<TimeDetails>h</TimeDetails> {totalTime.min}<TimeDetails>m</TimeDetails> {totalTime.sec}<TimeDetails>s</TimeDetails></Data></HightData>
+                        <HightData><Data>{lastTime.hour}<TimeDetails>h</TimeDetails> {lastTime.min}<TimeDetails>m</TimeDetails> {lastTime.sec}<TimeDetails>s</TimeDetails></Data><TitleData>Última vez</TitleData> </HightData>
+                        <HightData><Data>{halfTime.hour}<TimeDetails>h</TimeDetails> {halfTime.min}<TimeDetails>m</TimeDetails> {halfTime.sec}<TimeDetails>s</TimeDetails></Data><TitleData>Tiempo Medio</TitleData></HightData>
+                        <HightData><Data>{totalTime.hour}<TimeDetails>h</TimeDetails> {totalTime.min}<TimeDetails>m</TimeDetails> {totalTime.sec}<TimeDetails>s</TimeDetails></Data><TitleData>Tiempo Total</TitleData></HightData>
                     </Section>
                     <Section>
-                        <HightData><TitleData>Día Favorito</TitleData> <Data>{favDay}</Data></HightData>
-                        <HightData><TitleData>Hora Favorita</TitleData> <Data>{favHour}</Data></HightData>
+                        <HightData><Data>{favDay}</Data><TitleData>Día Favorito</TitleData></HightData>
+                        <HightData><Data>{favHour}</Data><TitleData>Hora Favorita</TitleData></HightData>
                     </Section>
                 </MainSection>
             </Container>

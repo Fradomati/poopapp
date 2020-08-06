@@ -8,6 +8,6 @@ height: 100%;
 `;
 
 export const SubMainContainer = styled.div`
-width: 95%;
-background-color: #f7f7f7;
+width: 100%;
+
 `;
