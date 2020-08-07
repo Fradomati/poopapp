@@ -1,10 +1,16 @@
 import React, { useContext } from "react";
-import { NavContainer, UlNavbar, LiNavBar } from "./style"
 import { Link } from "react-router-dom"
 import { logoutFn } from "../../services/AuthService"
 import { withRouter } from "react-router-dom"
 
 import { UserInfoContext } from "../../contexts/UserContext/index"
+
+// Styles
+import { NavContainer, UlNavbar, LiNavBar, Img } from "./style"
+
+// Icons 
+
+import timers from "../../../public/images/icons/Timers.png"
 
 
 export const Navbar = withRouter(({ history }) => {
@@ -23,7 +29,7 @@ export const Navbar = withRouter(({ history }) => {
             <UlNavbar>
                 {userOn && (
                     <LiNavBar>
-                        <Link to="/" >Home</Link>
+                        <Link to="/" ><Img src={timers}></Img></Link>
                     </LiNavBar>
                 )
                 }

@@ -6,7 +6,7 @@ export const NavContainer = styled.div`
 display: flex;
 align-items: center;
 width: 100%;
-height: 5vh;
+height: 7vh;
 background-color: #2EC4B6;
 position: fixed;
 bottom: 0;
@@ -27,5 +27,9 @@ a {
     color: black;
     text-decoration: none;
 }
-`;
+`
+
+export const Img = styled.img`
+width: 1.8em;
+`
 
