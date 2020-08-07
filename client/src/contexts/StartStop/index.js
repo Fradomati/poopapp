@@ -5,8 +5,11 @@ import { sendTimeFN } from "../../services/DataService"
 import { whoameFN } from "../../services/AuthService"
 
 // Styles
-import { StartedButton, StoppedButton, MainContainer } from "./style"
+import { StartedButton, StoppedButton, MainContainer, Img } from "./style"
 
+// Icons 
+import bano from "../../../public/images/icons/bano.png"
+import openBano from "../../../public/images/icons/bano-abierto.png"
 
 export const StartStopContext = createContext();
 
@@ -76,8 +79,8 @@ export const StartStopButton = props => {
 
             {userOn && (
                 <MainContainer>
-                    {start == false && <StartedButton onClick={() => { push(true) }}>Start</StartedButton>}
-                    {start == true && <StoppedButton onClick={() => { push(false) }}>Stop</StoppedButton>}
+                    {start == false && <StartedButton onClick={() => { push(true) }}><Img src={bano}></Img></StartedButton>}
+                    {start == true && <StoppedButton onClick={() => { push(false) }}><Img src={openBano} ></Img></StoppedButton>}
                     <div><p>Welcome!</p><p>{userOn.username}</p></div>
                 </MainContainer>
             )}

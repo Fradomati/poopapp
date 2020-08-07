@@ -7,12 +7,18 @@ justify-content: space-between;
 height: 8vh;
 padding: 0.5em 0.5em 0 0.5em
 `
-
+export const Img = styled.img`
+width: 2.5em;
+height: auto;
+padding: 0.5em;
+`
 
 export const StartedButton = styled.button`
-background-color: red;
+border-radius: 50%;
+background-color: #E71D36;
 `
 
 export const StoppedButton = styled.button`
-background-color: green;
+border-radius: 50%;
+background-color: #178825;
 `
