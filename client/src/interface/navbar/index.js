@@ -11,6 +11,7 @@ import { NavContainer, UlNavbar, LiNavBar, Img } from "./style"
 // Icons 
 
 import timers from "../../../public/images/icons/Timers.png"
+import user from "../../../public/images/icons/user.png"
 
 
 export const Navbar = withRouter(({ history }) => {
@@ -46,7 +47,7 @@ export const Navbar = withRouter(({ history }) => {
                 {userOn && (
                     <>
                         <LiNavBar>
-                            <Link to="/profile" > ¡Hola! {userOn.username} </Link>
+                            <Link to="/profile" ><Img src={user}></Img>  </Link>
                         </LiNavBar>
                         <LiNavBar>
                             <Link to="/" onClick={() => {
