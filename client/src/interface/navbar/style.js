@@ -7,7 +7,8 @@ display: flex;
 align-items: center;
 width: 100%;
 height: 7vh;
-background-color: #2EC4B6;
+background-color: #011627;
+box-shadow: 0px -1px 7px 0px #2EC4B6;
 position: fixed;
 bottom: 0;
 `;
@@ -18,13 +19,13 @@ flex-direction: row;
 width: 100%;
 justify-content: space-evenly;
 list-style-type: none;
-color: black;
+color: white;
 `
 
 export const LiNavBar = styled.li`
 text-decoration: none;
 a {
-    color: black;
+    color: white;
     text-decoration: none;
 }
 `

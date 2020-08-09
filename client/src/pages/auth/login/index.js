@@ -6,6 +6,12 @@ import { Link } from "react-router-dom"
 
 import { UserInfoContext } from "../../../contexts/UserContext/index"
 
+// Styles
+
+// Styles
+import { Container, SubContainer, AuthForm } from "../../globalStyles"
+import { Title, Input, InputSend } from "../signup/style"
+
 export const Login = withRouter(({ history }) => {
     const { setUserOn } = useContext(UserInfoContext)
     const [err, setErr] = useState()
@@ -33,20 +39,23 @@ export const Login = withRouter(({ history }) => {
 
 
     return (
-        <>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <input type="text" placeholder="Email" name="mail" ref={register({
-                    required: true, pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i
-                })} />
+        <Container>
+            <SubContainer>
+                <AuthForm onSubmit={handleSubmit(onSubmit)}>
+                    <Title>Iniciar Sesión</Title>
+                    <Input type="text" placeholder="Email" name="mail" ref={register({
+                        required: true, pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i
+                    })} />
 
-                <input type="text" placeholder="Contraseña" name="password" ref={register({
-                    required: true, min: 8,
-                })} />
+                    <Input type="text" placeholder="Contraseña" name="password" ref={register({
+                        required: true, min: 8,
+                    })} />
 
-                <input type="submit" />
-            </form>
-            {err && (<p>{err}</p>)}
-            <Link to="/forgot-password">¿Has olvidado la contraseña?</Link>
-        </>
+                    <InputSend type="submit" />
+                    <Link to="/forgot-password">¿Has olvidado la contraseña?</Link>
+                </AuthForm>
+                {err && (<p>{err}</p>)}
+            </SubContainer>
+        </Container>
     )
 })
