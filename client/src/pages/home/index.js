@@ -6,7 +6,7 @@ import { fnHalfTime, fnSumTime, fnDayWeek, fnHourDay, fnMountTime } from "../../
 
 // Styles
 
-import { MainSection, Section, HightData, TitleData, Data, TimeDetails } from "./style"
+import { MainSection, Section, HightData, TitleData, Data, DataDivs, TimeDetails } from "./style"
 import { Container } from "../globalStyles"
 
 export const Home = props => {
@@ -65,12 +65,12 @@ export const Home = props => {
             <Container>
                 <MainSection>
                     <Section>
-                        <HightData> {currTime && <Data>{currTime.hour}<TimeDetails>h</TimeDetails> {currTime.min}<TimeDetails>m</TimeDetails> {currTime.sec}<TimeDetails>s</TimeDetails></Data>}<TitleData>Actual</TitleData></HightData>
+                        <HightData> {currTime && <Data><DataDivs>{currTime.hour}<TimeDetails>h</TimeDetails></DataDivs><DataDivs> {currTime.min}<TimeDetails>m</TimeDetails> </DataDivs><DataDivs>{currTime.sec}<TimeDetails>s</TimeDetails></DataDivs></Data>}<TitleData>Actual</TitleData></HightData>
                     </Section>
                     <Section>
-                        <HightData><Data>{lastTime.hour}<TimeDetails>h</TimeDetails> {lastTime.min}<TimeDetails>m</TimeDetails> {lastTime.sec}<TimeDetails>s</TimeDetails></Data><TitleData>Última vez</TitleData> </HightData>
-                        <HightData><Data>{halfTime.hour}<TimeDetails>h</TimeDetails> {halfTime.min}<TimeDetails>m</TimeDetails> {halfTime.sec}<TimeDetails>s</TimeDetails></Data><TitleData>Tiempo Medio</TitleData></HightData>
-                        <HightData><Data>{totalTime.hour}<TimeDetails>h</TimeDetails> {totalTime.min}<TimeDetails>m</TimeDetails> {totalTime.sec}<TimeDetails>s</TimeDetails></Data><TitleData>Tiempo Total</TitleData></HightData>
+                        <HightData><Data><DataDivs>{lastTime.hour}<TimeDetails>hr</TimeDetails></DataDivs><DataDivs>{lastTime.min}<TimeDetails>mn</TimeDetails></DataDivs><DataDivs>{lastTime.sec}<TimeDetails>sc</TimeDetails></DataDivs></Data><TitleData>Última vez</TitleData> </HightData>
+                        <HightData><Data><DataDivs>{halfTime.hour}<TimeDetails>hr</TimeDetails> </DataDivs><DataDivs>{halfTime.min}<TimeDetails>mn</TimeDetails> </DataDivs><DataDivs>{halfTime.sec}<TimeDetails>sc</TimeDetails></DataDivs></Data><TitleData>Tiempo Medio</TitleData></HightData>
+                        <HightData><Data><DataDivs>{totalTime.hour}<TimeDetails>hr</TimeDetails> </DataDivs><DataDivs>{totalTime.min}<TimeDetails>mn</TimeDetails> </DataDivs><DataDivs>{totalTime.sec}<TimeDetails>sc</TimeDetails></DataDivs></Data><TitleData>Tiempo Total</TitleData></HightData>
                     </Section>
                     <Section>
                         <HightData><Data>{favDay}</Data><TitleData>Día Favorito</TitleData></HightData>

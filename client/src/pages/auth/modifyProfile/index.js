@@ -5,7 +5,10 @@ import { withProtected } from "../../../../lib/Protect/index"
 
 import { UserInfoContext } from "../../../contexts/UserContext/index"
 
+// Styles 
 
+import { Container, SubContainer, AuthForm } from "../../globalStyles"
+import { Title, Input, InputSend, LinkForgot, textForgot } from "../signup/style"
 
 
 export const ModifyProfile = withProtected(() => {
@@ -52,37 +55,40 @@ export const ModifyProfile = withProtected(() => {
 
 
     return (
-        <>
-            <ul>
-                <li>Username: {userOn.username} <button onClick={() => modify("User")}>Modificar</button></li>
-                {changeUser && (
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                        <input type="text" placeholder={userOn.username} name="username" ref={register({
-                            required: true
-                        })} />
-                        <input type="submit" />
-                    </form>
-                )}
-                <li>Email: {userOn.email} <button onClick={() => modify("Email")}>Modificar</button></li>
-                {changeEmail && (
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                        <input type="text" placeholder={userOn.email} name="mail" ref={register({
-                            required: true, pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i
-                        })} />
-                        <input type="submit" />
-                    </form>
-                )}
-                <li>¿Quieres cambiar la contraseña? <button onClick={() => modify("Pass")}>Modificar</button></li>
-                {changePass && (
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                        <input type="text" placeholder="********" name="password" ref={register({
-                            required: true
-                        })} />
-                        <input type="submit" />
-                    </form>
-                )}
-            </ul>
+        <Container>
+            <SubContainer>
+                <ul>
+                    <Title>Mi perfil</Title>
+                    <li>Username: {userOn.username} <button onClick={() => modify("User")}>Modificar</button></li>
+                    {changeUser && (
+                        <form onSubmit={handleSubmit(onSubmit)}>
+                            <input type="text" placeholder={userOn.username} name="username" ref={register({
+                                required: true
+                            })} />
+                            <input type="submit" />
+                        </form>
+                    )}
+                    <li>Email: {userOn.email} <button onClick={() => modify("Email")}>Modificar</button></li>
+                    {changeEmail && (
+                        <form onSubmit={handleSubmit(onSubmit)}>
+                            <input type="text" placeholder={userOn.email} name="mail" ref={register({
+                                required: true, pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i
+                            })} />
+                            <input type="submit" />
+                        </form>
+                    )}
+                    <li>¿Quieres cambiar la contraseña? <button onClick={() => modify("Pass")}>Modificar</button></li>
+                    {changePass && (
+                        <form onSubmit={handleSubmit(onSubmit)}>
+                            <input type="text" placeholder="********" name="password" ref={register({
+                                required: true
+                            })} />
+                            <input type="submit" />
+                        </form>
+                    )}
+                </ul>
 
-        </>
+            </SubContainer>
+        </Container>
     )
 })

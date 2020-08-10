@@ -30,9 +30,19 @@ margin-top: 0.8em;
 color: #011627;
 `
 export const Data = styled.p`
-font-size: 1.7em;
+display: flex;
+justify-content: space-evenly;
+align-items: center;
+font-size: 1.5em;
 color: #EFFFE9;
 `
+export const DataDivs = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: center;
+
+`
+
 export const TimeDetails = styled.span`
 font-size: 0.65em
 `

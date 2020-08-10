@@ -6,7 +6,7 @@ import { withRouter } from "react-router-dom"
 
 // Styles
 import { Container, SubContainer, AuthForm } from "../../globalStyles"
-import { Title, Input, InputSend } from "./style"
+import { Title, Input, InputSend, TextForgot } from "./style"
 
 export const Signup = withRouter(({ history }) => {
     const [err, setErr] = useState()
@@ -46,8 +46,8 @@ export const Signup = withRouter(({ history }) => {
                     })} />
 
                     <InputSend type="submit" />
+                    {err && (<TextForgot>{err}<a href="/login"> ¿Iniciar Sesión?</a></TextForgot>)}
                 </AuthForm>
-                {err && (<p>{err}<a href="/login"> ¿Iniciar Sesión?</a></p>)}
             </SubContainer>
         </Container>
     )

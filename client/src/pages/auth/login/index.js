@@ -10,7 +10,7 @@ import { UserInfoContext } from "../../../contexts/UserContext/index"
 
 // Styles
 import { Container, SubContainer, AuthForm } from "../../globalStyles"
-import { Title, Input, InputSend } from "../signup/style"
+import { Title, Input, InputSend, LinkForgot, textForgot } from "../signup/style"
 
 export const Login = withRouter(({ history }) => {
     const { setUserOn } = useContext(UserInfoContext)
@@ -52,9 +52,9 @@ export const Login = withRouter(({ history }) => {
                     })} />
 
                     <InputSend type="submit" />
-                    <Link to="/forgot-password">¿Has olvidado la contraseña?</Link>
+                    <Link to="/forgot-password"><LinkForgot>¿Has olvidado la contraseña?</LinkForgot></Link>
                 </AuthForm>
-                {err && (<p>{err}</p>)}
+                {err && (<textForgot>{err}</textForgot>)}
             </SubContainer>
         </Container>
     )
