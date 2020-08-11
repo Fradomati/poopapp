@@ -9,6 +9,11 @@ import { UserInfoContext } from "../../../contexts/UserContext/index"
 
 import { Container, SubContainer, AuthForm } from "../../globalStyles"
 import { Title, Input, InputSend, LinkForgot, textForgot } from "../signup/style"
+import { Ul, Li, TitleProfile, ImgEdit } from "./style"
+
+// images 
+
+import edit from "../../../../public/images/icons/editar.png"
 
 
 export const ModifyProfile = withProtected(() => {
@@ -57,36 +62,36 @@ export const ModifyProfile = withProtected(() => {
     return (
         <Container>
             <SubContainer>
-                <ul>
+                <Ul>
                     <Title>Mi perfil</Title>
-                    <li>Username: {userOn.username} <button onClick={() => modify("User")}>Modificar</button></li>
+                    <Li><TitleProfile>Nick</TitleProfile> {userOn.username} <ImgEdit src={edit} onClick={() => modify("User")} ></ImgEdit></Li>
                     {changeUser && (
                         <form onSubmit={handleSubmit(onSubmit)}>
-                            <input type="text" placeholder={userOn.username} name="username" ref={register({
+                            <Input type="text" placeholder={userOn.username} name="username" ref={register({
                                 required: true
                             })} />
                             <input type="submit" />
                         </form>
                     )}
-                    <li>Email: {userOn.email} <button onClick={() => modify("Email")}>Modificar</button></li>
+                    <Li><TitleProfile>Email</TitleProfile> {userOn.email} <ImgEdit src={edit} onClick={() => modify("Email")} ></ImgEdit></Li>
                     {changeEmail && (
                         <form onSubmit={handleSubmit(onSubmit)}>
-                            <input type="text" placeholder={userOn.email} name="mail" ref={register({
+                            <Input type="text" placeholder={userOn.email} name="mail" ref={register({
                                 required: true, pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i
                             })} />
                             <input type="submit" />
                         </form>
                     )}
-                    <li>¿Quieres cambiar la contraseña? <button onClick={() => modify("Pass")}>Modificar</button></li>
+                    <Li><TitleProfile>¿Quieres cambiar la contraseña?</TitleProfile> <ImgEdit src={edit} onClick={() => modify("Pass")} ></ImgEdit></Li>
                     {changePass && (
                         <form onSubmit={handleSubmit(onSubmit)}>
-                            <input type="text" placeholder="********" name="password" ref={register({
+                            <Input type="text" placeholder="********" name="password" ref={register({
                                 required: true
                             })} />
                             <input type="submit" />
                         </form>
                     )}
-                </ul>
+                </Ul>
 
             </SubContainer>
         </Container>

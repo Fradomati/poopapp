@@ -65,7 +65,7 @@ export const Home = props => {
             <Container>
                 <MainSection>
                     <Section>
-                        <HightData> {currTime && <Data><DataDivs>{currTime.hour}<TimeDetails>h</TimeDetails></DataDivs><DataDivs> {currTime.min}<TimeDetails>m</TimeDetails> </DataDivs><DataDivs>{currTime.sec}<TimeDetails>s</TimeDetails></DataDivs></Data>}<TitleData>Actual</TitleData></HightData>
+                        <HightData> {currTime && <Data><DataDivs>{currTime.hour}<TimeDetails>hr</TimeDetails></DataDivs><DataDivs> {currTime.min}<TimeDetails>mn</TimeDetails> </DataDivs><DataDivs>{currTime.sec}<TimeDetails>sc</TimeDetails></DataDivs></Data>}<TitleData>Actual</TitleData></HightData>
                     </Section>
                     <Section>
                         <HightData><Data><DataDivs>{lastTime.hour}<TimeDetails>hr</TimeDetails></DataDivs><DataDivs>{lastTime.min}<TimeDetails>mn</TimeDetails></DataDivs><DataDivs>{lastTime.sec}<TimeDetails>sc</TimeDetails></DataDivs></Data><TitleData>Última vez</TitleData> </HightData>

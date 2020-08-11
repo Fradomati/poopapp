@@ -5,11 +5,12 @@ import { sendTimeFN } from "../../services/DataService"
 import { whoameFN } from "../../services/AuthService"
 
 // Styles
-import { StartedButton, StoppedButton, MainContainer, Img } from "./style"
+import { StartedButton, StoppedButton, MainContainer, Img, LogoImg } from "./style"
 
 // Icons 
 import bano from "../../../public/images/icons/bano.png"
 import openBano from "../../../public/images/icons/bano-abierto.png"
+import logo from "../../../public/images/icons/Pooptime-Logo2.png"
 
 export const StartStopContext = createContext();
 
@@ -81,6 +82,7 @@ export const StartStopButton = props => {
                 <MainContainer>
                     {start == false && <StartedButton onClick={() => { push(true) }}><Img src={bano}></Img></StartedButton>}
                     {start == true && <StoppedButton onClick={() => { push(false) }}><Img src={openBano} ></Img></StoppedButton>}
+                    <LogoImg src={logo}></LogoImg>
                     <div><p>Welcome!</p><p>{userOn.username}</p></div>
                 </MainContainer>
             )}

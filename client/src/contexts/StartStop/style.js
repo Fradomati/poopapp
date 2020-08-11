@@ -26,6 +26,9 @@ border-radius: 50%;
 background-color: #178825;
 box-shadow: inset 0px 0px 6px 2px #0c0c0c;
 border: 0.2em solid black;
+`
 
-
+export const LogoImg = styled.img`
+height: 4em;
+width: auto;
 `

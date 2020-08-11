@@ -5,8 +5,12 @@ import { withRouter } from "react-router-dom"
 
 
 // Styles
-import { Container, SubContainer, AuthForm } from "../../globalStyles"
+import { Container, SubContainer, AuthForm, CenterLogo, Logo } from "../../globalStyles"
 import { Title, Input, InputSend, TextForgot } from "./style"
+
+// Images
+
+import logo from "../../../../public/images/icons/Pooptime-Logo2.png"
 
 export const Signup = withRouter(({ history }) => {
     const [err, setErr] = useState()
@@ -32,22 +36,24 @@ export const Signup = withRouter(({ history }) => {
     return (
         <Container>
             <SubContainer>
+                <div>
+                    <CenterLogo>
+                        <Logo src={logo}></Logo>
+                    </CenterLogo>
+                    <AuthForm onSubmit={handleSubmit(onSubmit)}>
+                        <Title>Registro</Title>
+                        <Input type="text" placeholder="Email" name="mail" ref={register({
+                            required: true, pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i
+                        })} />
+                        <Input type="text" placeholder="Contraseña" name="password" ref={register({
+                            required: true, min: 8,
+                            pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/i
+                        })} />
 
-
-
-                <AuthForm onSubmit={handleSubmit(onSubmit)}>
-                    <Title>Registro</Title>
-                    <Input type="text" placeholder="Email" name="mail" ref={register({
-                        required: true, pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i
-                    })} />
-                    <Input type="text" placeholder="Contraseña" name="password" ref={register({
-                        required: true, min: 8,
-                        pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/i
-                    })} />
-
-                    <InputSend type="submit" />
-                    {err && (<TextForgot>{err}<a href="/login"> ¿Iniciar Sesión?</a></TextForgot>)}
-                </AuthForm>
+                        <InputSend type="submit" />
+                        {err && (<TextForgot>{err}<a href="/login"> ¿Iniciar Sesión?</a></TextForgot>)}
+                    </AuthForm>
+                </div>
             </SubContainer>
         </Container>
     )
