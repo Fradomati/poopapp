@@ -4,6 +4,10 @@ import { withRouter } from "react-router-dom";
 import { forgotFN } from "../../../services/AuthService"
 
 
+// Styles
+import { Container, SubContainer, AuthForm } from "../../globalStyles"
+import { Title, Input, InputSend } from "../signup/style"
+import { P } from "./style"
 
 export const ForgotPassword = withRouter(({ history }) => {
 
@@ -31,17 +35,21 @@ export const ForgotPassword = withRouter(({ history }) => {
 
 
     return (
-        <>
-            <p>Escribe tu correo para mandarte la nueva contraseña:</p>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <input type="text" placeholder="Email" name="mail" ref={register({
-                    required: true, pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i
-                })} />
+        <Container>
+            <SubContainer>
 
-                <input type="submit" />
-            </form>
-            {err && (<p>{err}</p>)}
+                <AuthForm onSubmit={handleSubmit(onSubmit)}>
+                    <Title>Cambio de Contraseña</Title>
+                    <P>Escribe tu correo y te enviamos una nueva contraseña:</P>
+                    <Input type="text" placeholder="Email" name="mail" ref={register({
+                        required: true, pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i
+                    })}></Input>
 
-        </>
+                    <InputSend type="submit" ></InputSend>
+                </AuthForm>
+                {err && (<p>{err}</p>)}
+
+            </SubContainer>
+        </Container>
     )
 })
