@@ -47,11 +47,11 @@ export const ModifyProfile = withProtected(() => {
 
     const modify = (field) => {
         switch (field) {
-            case "User": setChangeUser(true)
+            case "User": changeUser ? setChangeUser(null) : setChangeUser(true);
                 break;
-            case "Email": setChangeEmail(true)
+            case "Email": changeEmail ? setChangeEmail(null) : setChangeEmail(true);
                 break;
-            case "Pass": setChangePass(true)
+            case "Pass": changePass ? setChangePass(null) : setChangePass(true);
                 break;
             default:
                 console.log("Algo falla en Modificar Usuario")
