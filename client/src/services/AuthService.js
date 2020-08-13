@@ -21,8 +21,9 @@ export const loginFn = async ({ mail, password }) => {
     const response = await authService.post("/login", {
         email,
         password
-    })
-
+    }
+    )
+    console.log("hola")
     return response.data
 }
 
