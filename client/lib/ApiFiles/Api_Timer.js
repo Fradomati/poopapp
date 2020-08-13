@@ -35,7 +35,6 @@ export const fnDayWeek = (days) => {
     const sum = fnSum(days);
     const half = sum / days.length;
 
-    console.log(Math.floor(half), "|||||||||||||||||||||||||||||");
     switch (Math.floor(half)) {
         case 1:
             return "Lunes";
@@ -97,7 +96,7 @@ export const fnCalTime = (time) => {
 
     const mount = fnMountTime(totalSec);
 
-    return mount;
+    return { mount, totalSec };
 };
 
 // Media Tiempo
