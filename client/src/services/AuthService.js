@@ -23,7 +23,6 @@ export const loginFn = async ({ mail, password }) => {
         password
     }
     )
-    console.log("hola")
     return response.data
 }
 
