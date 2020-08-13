@@ -6,7 +6,6 @@ import { getUserName } from "../../lib/Signup/Signup_Username"
 
 export const signupFn = async ({ mail, password }) => {
     let email = mail.toLowerCase()
-    console.log("Registro Minúsculas", email)
     const username = getUserName(email) // Get username from email
     const response = await authService.post("/signup", {
         email,
@@ -14,7 +13,6 @@ export const signupFn = async ({ mail, password }) => {
         password
     })
 
-    console.log("New register:", email, username, password)
     return response.data
 }
 
@@ -25,13 +23,11 @@ export const loginFn = async ({ mail, password }) => {
         password
     })
 
-    console.log("Login user:", email, password, response.data)
     return response.data
 }
 
 export const logoutFn = async () => {
     const response = await authService.post("/logout");
-    console.log("[LOGOUT]", response.data);
     return response.data;
 };
 

@@ -111,7 +111,6 @@ export const fnSumTime = (time) => {
 };
 
 export const fnHalfTime = (time) => {
-    console.log(time)
     let count = time.length;
     let sum = fnSum(time);
     let half = sum / count;

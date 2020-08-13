@@ -58,7 +58,6 @@ export const Home = props => {
     }, [userOn])
 
 
-    console.log(start)
     if (session) {
 
         return (

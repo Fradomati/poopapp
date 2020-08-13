@@ -11,6 +11,7 @@ import { StartedButton, StoppedButton, MainContainer, Img, LogoImg } from "./sty
 import bano from "../../../public/images/icons/bano.png"
 import openBano from "../../../public/images/icons/bano-abierto.png"
 import logo from "../../../public/images/icons/Pooptime-Logo2.png"
+import logoAnimated from "../../../public/images/icons/Poop-Time-gif.gif"
 
 export const StartStopContext = createContext();
 
@@ -54,8 +55,6 @@ export const StartStopButton = props => {
                 .then(update => {
                     setUserOn(update)
                 })
-            console.log("Segundos Totales:", currTime.totalSec)
-            console.log("Primer time", firstTime, "Segundo time", secondTime, "Diferencia", currTime)
             //Reseteo la Data en el Local.Storage
             localStorage.setItem("timeOne", "")
             localStorage.setItem("timeStatus", "")
@@ -82,7 +81,7 @@ export const StartStopButton = props => {
                 <MainContainer>
                     {start == false && <StartedButton onClick={() => { push(true) }}><Img src={bano}></Img></StartedButton>}
                     {start == true && <StoppedButton onClick={() => { push(false) }}><Img src={openBano} ></Img></StoppedButton>}
-                    <LogoImg src={logo}></LogoImg>
+                    <LogoImg src={start ? logoAnimated : logo}></LogoImg>
                     <div><p>Welcome!</p><p>{userOn.username}</p></div>
                 </MainContainer>
             )}

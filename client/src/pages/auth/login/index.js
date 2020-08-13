@@ -9,6 +9,7 @@ import { UserInfoContext } from "../../../contexts/UserContext/index"
 // Styles
 import { Container, SubContainer, AuthForm, CenterLogo, Logo } from "../../globalStyles"
 import { Title, Input, InputSend, LinkForgot, textForgot } from "../signup/style"
+import { P } from "./style"
 
 // Images 
 
@@ -37,7 +38,7 @@ export const Login = withRouter(({ history }) => {
     };
 
 
-    console.log("Error", errors);
+    // console.log("Error", errors);
 
 
     return (
@@ -60,7 +61,7 @@ export const Login = withRouter(({ history }) => {
                         <InputSend type="submit" />
                         <Link to="/forgot-password"><LinkForgot>¿Has olvidado la contraseña?</LinkForgot></Link>
                     </AuthForm>
-                    {err && (<textForgot>{err}</textForgot>)}
+                    {err && (<P>{err}</P>)}
                 </div>
             </SubContainer>
         </Container>

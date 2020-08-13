@@ -9,14 +9,11 @@ export const withAuthentication = (Component) => () => {
     const [userSession, setUserSession] = useState()
 
     useEffect(() => {
-        console.log("Welcome guy :)");
         whoameFN()
             .then((user) => {
-                console.log(`Welcome again user ${user.username}`);
                 setUserSession(user)
             })
             .catch((e) => {
-                console.log("No user logged in");
             })
             .finally(() => setLoading(false));
     }, []);

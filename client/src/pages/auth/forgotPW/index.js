@@ -25,13 +25,12 @@ export const ForgotPassword = withRouter(({ history }) => {
         if (responseServer.status == 417) {
             setErr(responseServer.message)
         } else {
-            console.log(responseServer.message)
             history.push("/login")
         }
     };
 
 
-    console.log("Error", errors);
+    // console.log("Error", errors);
 
 
     return (

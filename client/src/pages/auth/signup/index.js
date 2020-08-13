@@ -30,7 +30,7 @@ export const Signup = withRouter(({ history }) => {
     };
 
 
-    console.log("Error", errors);
+    // console.log("Error", errors);
 
 
     return (
