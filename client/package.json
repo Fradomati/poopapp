@@ -19,6 +19,7 @@
   },
   "scripts": {
     "start": "parcel public/index.html",
+    "build": "parcel public/index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
