@@ -2,11 +2,11 @@ import axios from "axios";
 
 
 export const authService = axios.create({
-    baseURL: "http://localhost:3000/auth",
+    baseURL: `${process.env.BACKEND_URL}/auth`,
     withCredentials: true
 })
 
 export const dataService = axios.create({
-    baseURL: "http://localhost:3000/dataTime",
+    baseURL: `${process.env.BACKEND_URL}/dataTime`,
     withCredentials: true
 })
