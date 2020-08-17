@@ -32,7 +32,7 @@ const debug = require("debug")(
 const app = express();
 
 // Cross Domain CORS whitlist
-const whitelist = ["http://localhost:3000", "http://localhost:1234"];
+const whitelist = ["http://localhost:3000", process.env.FRONTEND_URL];
 const corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
@@ -74,7 +74,6 @@ require("./passport/")(app);
 // app.set("views", path.join(__dirname, "views"));
 // app.set("view engine", "hbs");
 app.use(express.static(path.join(__dirname, "public")));
-// app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
 
 
 const index = require('./routes/index');
