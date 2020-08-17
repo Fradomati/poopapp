@@ -27,7 +27,7 @@ export const CenterLogo = styled.div`
     top: -12vh;
 `
 export const Logo = styled.img`
-width: 18em;
+width: 75%;
 height: auto;
 `
 
