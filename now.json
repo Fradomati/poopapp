@@ -4,18 +4,22 @@
     "public": false,
     "builds": [
         {
-            "src": "package.json",
+            "src": "/client/package.json",
             "use": "@now/static-build"
         },
         {
-            "src": "index.js",
+            "src": "/back/*.js",
             "use": "@now/node-server"
         }
     ],
     "routes": [
         {
-            "src": "/(.*)",
-            "dest": "dist/$1"
+            "src": "/back/(.*)",
+            "dest": "/back/$1"
+        },
+        {
+            "src": "/client/(.*)",
+            "dest": "/client/$1"
         }
     ]
 }
