@@ -1,14 +1,14 @@
 {
     "version": 2,
     "name": "Pooptime",
-    "public": true,
+    "public": false,
     "builds": [
         {
             "src": "/client/package.json",
             "use": "@now/static-build"
         },
         {
-            "src": "/back/*.js",
+            "src": "/back/bin/www",
             "use": "@now/node-server"
         }
     ],
