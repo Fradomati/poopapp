@@ -1,7 +1,7 @@
 {
     "scripts": {
         "build": "cd ./client && npm install && npm run build",
-        "postbuild": "copy \"./client/build/*\" \"./back/public\"",
+        "postbuild": "copy \"./client/dist/*\" \"./back/public\"",
         "heroku-postbuild": "cd ./client && npm install && npm run build",
         "start": "npm run build && npm run node back/bin/www"
     }
