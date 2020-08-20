@@ -87,11 +87,11 @@ app.use('/', index);
 
 // Login and Signup Route
 const auth = require("./routes/auth");
-app.use("/api/auth", auth);
+app.use("/auth", auth);
 
 // Data Timer 
 
 const dataTime = require("./routes/dataTime");
-app.use("/api/dataTime", dataTime)
+app.use("/dataTime", dataTime)
 
 module.exports = app;
