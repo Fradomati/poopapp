@@ -50,8 +50,11 @@ export const Navbar = withRouter(({ history }) => {
                             <Link to="/profile" ><Img src={user}></Img>  </Link>
                         </LiNavBar>
                         <LiNavBar>
-                            <Link to="/" onClick={() => {
-                                doLogout()
+                            <Link to="/" onClick={async () => {
+                                await logoutFn();
+                                setUserOn(null)
+                                localStorage.setItem("sessionOn", "")
+                                history.push("/login")
                             }} >Logout</Link>
                         </LiNavBar>
                     </>
