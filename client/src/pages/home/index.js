@@ -40,8 +40,11 @@ export const Home = props => {
             const allTimes = userOn?.totalTimes
             const allDays = userOn?.days
             const allHours = userOn?.hours
-            const arrTotalTimes = userOn?.totalTimes
-            const last = arrTotalTimes[arrTotalTimes - 1]
+
+            // Evito error en producción: 
+            const [...arrTotalTimes] = userOn?.totalTimes
+            const last = arrTotalTimes[arrTotalTimes.length - 1]
+
 
             const halfTimeCal = fnHalfTime(allTimes)
             const totalTimeCal = fnSumTime(allTimes)
