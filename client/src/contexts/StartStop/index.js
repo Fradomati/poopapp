@@ -3,6 +3,7 @@ import { fnGetDay, fnGetTime, fnCalTime } from "../../../lib/ApiFiles/Api_Timer"
 import { UserInfoContext } from "../../contexts/UserContext/index"
 import { sendTimeFN } from "../../services/DataService"
 import { whoameFN } from "../../services/AuthService"
+import { ON_user, OFF_user } from "../../services/OnlineUserService"
 
 // Styles
 import { StartedButton, StoppedButton, MainContainer, Img, LogoImg } from "./style"
@@ -31,6 +32,7 @@ export const StartStopButton = props => {
     const [time, setTime] = useState("");
     const [currTime, setCurrTime] = useState("")
     const [newTime, setNewTime] = useState(null)
+    const user_id = userOn?._id
 
 
     const push = x => {
@@ -42,6 +44,12 @@ export const StartStopButton = props => {
             // Send first Time to LocalStorage
             localStorage.setItem("timeOne", JSON.stringify(time))
             localStorage.setItem("timeStatus", true)
+
+            // User Online declaration
+            ON_user(user_id).then(update => {
+                console.log("Usuarios Online", update)
+            })
+
 
         } else {
             const firstTime = JSON.parse(localStorage.getItem("timeOne"))
@@ -58,6 +66,11 @@ export const StartStopButton = props => {
             //Reseteo la Data en el Local.Storage
             localStorage.setItem("timeOne", "")
             localStorage.setItem("timeStatus", "")
+
+            // User Offline declaration
+            OFF_user(user_id).then(update => {
+                console.log("Usuarios Offline", update)
+            })
 
         }
     }

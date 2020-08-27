@@ -11,7 +11,7 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 
 mongoose
-  .connect(process.env.MONGODB_URL, {
+  .connect(process.env.DBURL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -92,6 +92,11 @@ app.use("/auth", auth);
 // Data Timer 
 
 const dataTime = require("./routes/dataTime");
-app.use("/dataTime", dataTime)
+app.use("/dataTime", dataTime);
+
+// Online User
+
+const OnlineUser = require("./routes/onlineUser");
+app.use("/onlinesUser", OnlineUser);
 
 module.exports = app;
