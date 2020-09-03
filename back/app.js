@@ -92,6 +92,11 @@ app.use("/auth", auth);
 // Data Timer 
 
 const dataTime = require("./routes/dataTime");
-app.use("/dataTime", dataTime)
+app.use("/dataTime", dataTime);
+
+// Online User
+
+const OnlineUser = require("./routes/onlineUser");
+app.use("/onlinesUser", OnlineUser);
 
 module.exports = app;
