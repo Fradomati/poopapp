@@ -42,23 +42,24 @@ export const StartStopButton = props => {
 
     // Timer of Welcome Message
 
-
+    const timer = setInterval(() => {
+        console.log(welcomeMsg, "------- Hello Msg -------")
+        setWelcomeMsg(null)
+    }, 3500)
 
 
     useEffect(() => {
-
-        const timer = setInterval(() => {
-            console.log(welcomeMsg, "------- Hello Msg -------")
-            setWelcomeMsg(null)
-        }, 3500)
+        if (welcomeMsg == true) {
+            timer()
+        } else {
+            clearInterval(timer)
+        }
         ASK_user().then(data => {
             const arr = data?.TotalUserOnline
             const num = arr.length
             console.log("Nº:", num)
             setOnlineUsers(num)
         })
-
-        return () => clearInterval(timer)
     }, [])
 
 
