@@ -46,6 +46,7 @@ export const StartStopButton = props => {
 
 
     useEffect(() => {
+
         const timer = setInterval(() => {
             setWelcomeMsg(null)
         }, 3500)
@@ -131,7 +132,7 @@ export const StartStopButton = props => {
                     {start == true && <StoppedButton onClick={() => { push(false) }}><Img src={openBano} ></Img></StoppedButton>}
                     <LogoImg src={start ? logoAnimated : logo}></LogoImg>
 
-                    <InfoDiv>{welcomeMsg ? `Welcome ${userOn.username}` : onlineUsers}</InfoDiv>
+                    <InfoDiv>{welcomeMsg == true ? `Welcome ${userOn.username}` : onlineUsers}</InfoDiv>
                 </MainContainer>
             )
             }
