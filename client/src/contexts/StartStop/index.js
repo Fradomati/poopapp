@@ -48,6 +48,7 @@ export const StartStopButton = props => {
     useEffect(() => {
 
         const timer = setInterval(() => {
+            console.log(welcomeMsg, "------- Hello Msg -------")
             setWelcomeMsg(null)
         }, 3500)
         ASK_user().then(data => {
