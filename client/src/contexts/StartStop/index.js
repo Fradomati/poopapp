@@ -3,10 +3,10 @@ import { fnGetDay, fnGetTime, fnCalTime } from "../../../lib/ApiFiles/Api_Timer"
 import { UserInfoContext } from "../../contexts/UserContext/index"
 import { sendTimeFN } from "../../services/DataService"
 import { whoameFN } from "../../services/AuthService"
-import { ON_user, OFF_user } from "../../services/OnlineUserService"
+import { ON_user, OFF_user, ASK_user } from "../../services/OnlineUserService"
 
 // Styles
-import { StartedButton, StoppedButton, MainContainer, Img, LogoImg } from "./style"
+import { StartedButton, StoppedButton, MainContainer, Img, LogoImg, InfoDiv } from "./style"
 
 // Icons 
 import bano from "../../../public/images/icons/bano.png"
@@ -32,7 +32,28 @@ export const StartStopButton = props => {
     const [time, setTime] = useState("");
     const [currTime, setCurrTime] = useState("")
     const [newTime, setNewTime] = useState(null)
+
+    // ID USUARIO
     const user_id = userOn?._id
+
+    // Number of online user
+    const [onlineUsers, setOnlineUsers] = useState("0")
+    const [welcomeMsg, setWelcomeMsg] = useState(true)
+
+    // Timer of Welcome Message
+    setInterval(() => {
+        setWelcomeMsg(null)
+    }, 3500)
+
+
+    useEffect(() => {
+        ASK_user().then(data => {
+            const arr = data?.TotalUserOnline
+            const num = arr.length
+            console.log("Nº:", num)
+            setOnlineUsers(num)
+        })
+    }, [])
 
 
     const push = x => {
@@ -48,6 +69,10 @@ export const StartStopButton = props => {
             // User Online declaration
             ON_user(user_id).then(update => {
                 console.log("Usuarios Online", update)
+                const arr = update?.TotalUserOnline
+                const num = arr.length
+                console.log("Nº:", num)
+                setOnlineUsers(num)
             })
 
             console.log("hols")
@@ -72,6 +97,10 @@ export const StartStopButton = props => {
             // User Offline declaration
             OFF_user(user_id).then(update => {
                 console.log("Usuarios Offline", update)
+                const arr = update?.TotalUserOnline
+                const num = arr.length
+                console.log("Nº:", num)
+                setOnlineUsers(num)
             })
 
         }
@@ -97,12 +126,14 @@ export const StartStopButton = props => {
                     {start == false && <StartedButton onClick={() => { push(true) }}><Img src={bano}></Img></StartedButton>}
                     {start == true && <StoppedButton onClick={() => { push(false) }}><Img src={openBano} ></Img></StoppedButton>}
                     <LogoImg src={start ? logoAnimated : logo}></LogoImg>
-                    <div><p>Welcome!</p><p>{userOn.username}</p></div>
+
+                    <InfoDiv>{welcomeMsg ? `Welcome ${userOn.username}` : onlineUsers}</InfoDiv>
                 </MainContainer>
-            )}
+            )
+            }
 
             {props.children}
-        </StartStopContext.Provider>
+        </StartStopContext.Provider >
 
     )
 
