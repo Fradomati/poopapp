@@ -34,9 +34,7 @@ width: auto;
 `
 
 export const InfoDiv = styled.div`
-width: 20vw;
 display: flex;
-justify-content: center;
 align-items: center;
 font-size: 1.2em;
 `
