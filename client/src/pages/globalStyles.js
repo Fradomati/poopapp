@@ -34,3 +34,9 @@ height: auto;
 export const test = styled.div`
 display: none;
 `
+
+export const ErrorTxt = styled.p`
+font-size: 0.8em;
+margin: 0 0 0.5em 0;
+color: #ff284e;
+`

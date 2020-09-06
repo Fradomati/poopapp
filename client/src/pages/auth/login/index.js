@@ -50,8 +50,10 @@ export const Login = withRouter(({ history }) => {
                     </CenterLogo>
                     <AuthForm onSubmit={handleSubmit(onSubmit)}>
                         <Title>Iniciar Sesión</Title>
+                        {err && (<P>{err}</P>)}
                         <Input type="text" placeholder="Email" name="mail" ref={register({
-                            required: true, pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i
+                            required: true,
+                            pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i
                         })} />
 
                         <Input type="text" placeholder="Contraseña" name="password" ref={register({
@@ -61,7 +63,7 @@ export const Login = withRouter(({ history }) => {
                         <InputSend type="submit" />
                         <Link to="/forgot-password"><LinkForgot>¿Has olvidado la contraseña?</LinkForgot></Link>
                     </AuthForm>
-                    {err && (<P>{err}</P>)}
+
                 </div>
             </SubContainer>
         </Container>
