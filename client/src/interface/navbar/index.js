@@ -13,6 +13,8 @@ import { NavContainer, UlNavbar, LiNavBar, Img } from "./style"
 import timers from "../../../public/images/icons/Timers.png"
 import user from "../../../public/images/icons/user.png"
 
+/* ERROR EN EL LOGOUT (con el deploy) comprobar si puede ser la etiqueta "Link" */
+
 
 export const Navbar = withRouter(({ history }) => {
 
