@@ -4,6 +4,9 @@ import { whoameFN } from "../../src/services/AuthService"
 export const UserSessionContext = createContext();
 
 
+/* ERROR EN LA RECARGA DE USUARIO, puede que como tarda tanto en recibir la información del back
+carge los datos... quizás podría solucionarse con un "if(!loading)..." */
+
 export const withAuthentication = (Component) => () => {
     const [loading, setLoading] = useState(true);
     const [userSession, setUserSession] = useState()
@@ -21,7 +24,7 @@ export const withAuthentication = (Component) => () => {
     return (
         <UserSessionContext.Provider value={{ userSession, setUserSession }}>
             {loading && (<p>Cargando...</p>)}
-            <Component />
+            {!loading && (<Component />)}
         </UserSessionContext.Provider>
     );
 };
