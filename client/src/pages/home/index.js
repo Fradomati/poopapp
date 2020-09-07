@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { StartStopContext } from "../../contexts/StartStop/index"
 import { UserInfoContext } from "../../contexts/UserContext/index"
+import { UserSessionContext } from "../../../lib/Authentication/withAuthentication"
 import { Redirect } from "react-router-dom";
 import { fnHalfTime, fnSumTime, fnDayWeek, fnHourDay, fnMountTime } from "../../../lib/ApiFiles/Api_Timer"
 
@@ -9,10 +10,11 @@ import { fnHalfTime, fnSumTime, fnDayWeek, fnHourDay, fnMountTime } from "../../
 import { MainSection, Section, HightData, TitleData, Data, DataDivs, TimeDetails } from "./style"
 import { Container } from "../globalStyles"
 
-export const Home = props => {
+export const Home = ({ value }) => {
 
     const { start, time, currTime } = useContext(StartStopContext)
     const { userOn } = useContext(UserInfoContext)
+    const { userSession } = useContext(UserSessionContext)
     const [timer, setTimer] = useState("Nothing")
 
     // Data Times
@@ -31,8 +33,6 @@ export const Home = props => {
             setTimer(`Hour: ${time.hour}, Min: ${time.min}, Sec: ${time.sec}`)
         }
     }, [time])
-
-
 
 
     useEffect(() => {
@@ -62,7 +62,7 @@ export const Home = props => {
     }, [userOn])
 
 
-    if (session) {
+    if (userSession) {
 
         return (
             <Container>

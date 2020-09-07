@@ -11,6 +11,7 @@ export const withAuthentication = (Component) => () => {
     const [loading, setLoading] = useState(true);
     const [userSession, setUserSession] = useState()
 
+
     useEffect(() => {
         whoameFN()
             .then((user) => {
@@ -24,7 +25,7 @@ export const withAuthentication = (Component) => () => {
     return (
         <UserSessionContext.Provider value={{ userSession, setUserSession }}>
             {loading && (<p>Cargando...</p>)}
-            {!loading && (<Component />)}
+            {!loading && (<Component value={userSession} />)}
         </UserSessionContext.Provider>
     );
 };
