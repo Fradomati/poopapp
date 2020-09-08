@@ -12,21 +12,39 @@ import { Container } from "../globalStyles"
 
 export const Home = ({ value }) => {
 
+    // CONTEXTS
     const { start, time, currTime } = useContext(StartStopContext)
     const { userOn } = useContext(UserInfoContext)
-    const { userSession } = useContext(UserSessionContext)
+    const { userSession, noneSession } = useContext(UserSessionContext)
+
+    // STATES OF USER
+    const [session, setSession] = useState()
+    const [closeSession, setCloseSession] = useState()
+
+    // STATES OF DATA TIMERS
+
     const [timer, setTimer] = useState("Nothing")
-
-    // Data Times
-
     const [halfTime, setHalfTime] = useState({ hour: 0, min: 0, sec: 0 })
     const [lastTime, setLastTime] = useState({ hour: 0, min: 0, sec: 0 })
     const [totalTime, setTotalTime] = useState({ hour: 0, min: 0, sec: 0 })
     const [favDay, setFavDay] = useState("Ninguno")
     const [favHour, setFavHour] = useState("Ninguna")
 
-    // Check session on
-    const session = localStorage.getItem("sessionOn")
+    // Check session on ON "LOCAL STORAGE"
+    //  const session = localStorage.getItem("sessionOn")
+
+
+    // If there are session on, then it set "Session" to hide the "Loading" and show the data.
+    useEffect(() => {
+        if (userSession) setSession(true)
+    }, [userSession])
+
+    // If there aren't session on, then it set "Close Session" to redirect user to login
+    useEffect(() => {
+        if (noneSession) setCloseSession(true)
+    }, [noneSession])
+
+    // Check time
 
     useEffect(() => {
         if (time != "") {
@@ -34,7 +52,7 @@ export const Home = ({ value }) => {
         }
     }, [time])
 
-
+    // CHECK USER DATA
     useEffect(() => {
         if (userOn) {
             const allTimes = userOn?.totalTimes
@@ -62,7 +80,7 @@ export const Home = ({ value }) => {
     }, [userOn])
 
 
-    if (userSession) {
+    if (session) {
 
         return (
             <Container>
@@ -82,7 +100,12 @@ export const Home = ({ value }) => {
                 </MainSection>
             </Container>
         )
-    } else {
+
+    } else if (closeSession) {
         return <Redirect to="/login" />
+    }
+    else if (!session) {
+        return (<p>Cargando...</p>)
+
     }
 }
