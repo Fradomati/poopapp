@@ -4,13 +4,14 @@ import { UserInfoContext } from "../../contexts/UserContext/index"
 import { UserSessionContext } from "../../../lib/Authentication/withAuthentication"
 import { Redirect } from "react-router-dom";
 import { fnHalfTime, fnSumTime, fnDayWeek, fnHourDay, fnMountTime } from "../../../lib/ApiFiles/Api_Timer"
+import { withProtected } from "../../../lib/Protect/index"
 
 // Styles
 
 import { MainSection, Section, HightData, TitleData, Data, DataDivs, TimeDetails } from "./style"
 import { Container } from "../globalStyles"
 
-export const Home = ({ value }) => {
+export const Home = withProtected(() => {
 
     // CONTEXTS
     const { start, time, currTime } = useContext(StartStopContext)
@@ -80,32 +81,24 @@ export const Home = ({ value }) => {
     }, [userOn])
 
 
-    if (session) {
+    return (
+        <Container>
+            <MainSection>
+                <Section>
+                    <HightData> {currTime && <Data><DataDivs>{currTime.hour}<TimeDetails>hr</TimeDetails></DataDivs><DataDivs> {currTime.min}<TimeDetails>mn</TimeDetails> </DataDivs><DataDivs>{currTime.sec}<TimeDetails>sc</TimeDetails></DataDivs></Data>}<TitleData>Actual</TitleData></HightData>
+                </Section>
+                <Section>
+                    <HightData><Data><DataDivs>{lastTime.hour}<TimeDetails>hr</TimeDetails></DataDivs><DataDivs>{lastTime.min}<TimeDetails>mn</TimeDetails></DataDivs><DataDivs>{lastTime.sec}<TimeDetails>sc</TimeDetails></DataDivs></Data><TitleData>Última vez</TitleData> </HightData>
+                    <HightData><Data><DataDivs>{halfTime.hour}<TimeDetails>hr</TimeDetails> </DataDivs><DataDivs>{halfTime.min}<TimeDetails>mn</TimeDetails> </DataDivs><DataDivs>{halfTime.sec}<TimeDetails>sc</TimeDetails></DataDivs></Data><TitleData>Tiempo Medio</TitleData></HightData>
+                    <HightData><Data><DataDivs>{totalTime.hour}<TimeDetails>hr</TimeDetails> </DataDivs><DataDivs>{totalTime.min}<TimeDetails>mn</TimeDetails> </DataDivs><DataDivs>{totalTime.sec}<TimeDetails>sc</TimeDetails></DataDivs></Data><TitleData>Tiempo Total</TitleData></HightData>
+                </Section>
+                <Section>
+                    <HightData><Data>{favDay}</Data><TitleData>Día Favorito</TitleData></HightData>
+                    <HightData><Data>{favHour}</Data><TitleData>Hora Favorita</TitleData></HightData>
+                </Section>
+            </MainSection>
+        </Container>
+    )
 
-        return (
-            <Container>
-                <MainSection>
-                    <Section>
-                        <HightData> {currTime && <Data><DataDivs>{currTime.hour}<TimeDetails>hr</TimeDetails></DataDivs><DataDivs> {currTime.min}<TimeDetails>mn</TimeDetails> </DataDivs><DataDivs>{currTime.sec}<TimeDetails>sc</TimeDetails></DataDivs></Data>}<TitleData>Actual</TitleData></HightData>
-                    </Section>
-                    <Section>
-                        <HightData><Data><DataDivs>{lastTime.hour}<TimeDetails>hr</TimeDetails></DataDivs><DataDivs>{lastTime.min}<TimeDetails>mn</TimeDetails></DataDivs><DataDivs>{lastTime.sec}<TimeDetails>sc</TimeDetails></DataDivs></Data><TitleData>Última vez</TitleData> </HightData>
-                        <HightData><Data><DataDivs>{halfTime.hour}<TimeDetails>hr</TimeDetails> </DataDivs><DataDivs>{halfTime.min}<TimeDetails>mn</TimeDetails> </DataDivs><DataDivs>{halfTime.sec}<TimeDetails>sc</TimeDetails></DataDivs></Data><TitleData>Tiempo Medio</TitleData></HightData>
-                        <HightData><Data><DataDivs>{totalTime.hour}<TimeDetails>hr</TimeDetails> </DataDivs><DataDivs>{totalTime.min}<TimeDetails>mn</TimeDetails> </DataDivs><DataDivs>{totalTime.sec}<TimeDetails>sc</TimeDetails></DataDivs></Data><TitleData>Tiempo Total</TitleData></HightData>
-                    </Section>
-                    <Section>
-                        <HightData><Data>{favDay}</Data><TitleData>Día Favorito</TitleData></HightData>
-                        <HightData><Data>{favHour}</Data><TitleData>Hora Favorita</TitleData></HightData>
-                    </Section>
-                </MainSection>
-            </Container>
-        )
 
-    } else if (closeSession) {
-        return <Redirect to="/login" />
-    }
-    else if (!session) {
-        return (<p>Cargando...</p>)
-
-    }
-}
+})
