@@ -10,6 +10,7 @@ carge los datos... quizás podría solucionarse con un "if(!loading)..." */
 export const withAuthentication = (Component) => () => {
     const [loading, setLoading] = useState(true);
     const [userSession, setUserSession] = useState()
+    const [noneSession, setNoneSession] = useState()
 
 
     useEffect(() => {
@@ -18,12 +19,13 @@ export const withAuthentication = (Component) => () => {
                 setUserSession(user)
             })
             .catch((e) => {
+                setNoneSession(true)
             })
             .finally(() => setLoading(false));
     }, []);
 
     return (
-        <UserSessionContext.Provider value={{ userSession, setUserSession }}>
+        <UserSessionContext.Provider value={{ userSession, setUserSession, noneSession }}>
             {loading && (<p>Cargando...</p>)}
             {!loading && (<Component value={userSession} />)}
         </UserSessionContext.Provider>
