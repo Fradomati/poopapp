@@ -8,12 +8,16 @@ export const withProtected = (Component) => () => {
 
     const { userOn } = useContext(UserInfoContext);
 
+    console.log("WithProtect", userOn)
 
 
-
-    if (userOn) {
-        return <Component />;
+    if (userOn == null) {
+        return <p>Loading...</p>
     } else {
-        return <Redirect to="/signup" />;
+        if (userOn == false) {
+            return <Redirect to="/signup" />;
+        } else {
+            return <Component />;
+        }
     }
 };
