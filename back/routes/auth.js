@@ -152,7 +152,7 @@ router.get("/whoame", (req, res) => {
             ])
         );
     } else {
-        return res.status(401).json({ status: "No user session found" });
+        return res.status(402).json({ status: "No user session found" });
     }
 });
 
