@@ -40,7 +40,7 @@ export const forgotFN = async ({ mail }) => {
 }
 
 export const whoameFN = async () => {
-    const response = await authService.post("/whoame")
+    const response = await authService.get("/whoame")
     return response.data
 }
 

@@ -134,7 +134,7 @@ router.post("/modifyProfile", async (req, res) => {
 
 })
 
-router.post("/whoame", (req, res) => {
+router.get("/whoame", (req, res) => {
     if (req.user) {
         return res.json(
             _.pick(req.user, [
