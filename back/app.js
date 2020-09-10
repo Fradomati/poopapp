@@ -32,7 +32,7 @@ const debug = require("debug")(
 const app = express();
 
 // Cross Domain CORS whitlist
-const whitelist = [process.env.FRONTEND_URL, "http://localhost:3000"];
+const whitelist = [process.env.FRONTEND_URL];
 const corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
@@ -54,9 +54,12 @@ app.use(cookieParser());
 app.use(
   session({
     secret: process.env.SESSION_PASSWORD,
-    resave: true,
+    resave: false,
     saveUninitialized: true,
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    cookie: {
+      secure: true
+    }
   })
 );
 
