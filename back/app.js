@@ -31,7 +31,7 @@ const debug = require("debug")(
 );
 
 const app = express();
-app.set("Trust proxy", 1)
+app.set("trust proxy", 1)
 app.use(secure)
 
 // Cross Domain CORS whitlist
@@ -60,6 +60,7 @@ app.use(
     secret: process.env.SESSION_PASSWORD,
     resave: true,
     saveUninitialized: true,
+    cookie: { secure: true },
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
   })
 );
