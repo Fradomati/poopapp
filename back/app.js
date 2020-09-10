@@ -44,6 +44,7 @@ const corsOptions = {
   credentials: true,
 };
 
+app.use(express.static(path.join(__dirname, "public")));
 // Middleware Setup
 app.use(cors(corsOptions));
 app.use(logger("dev"));
@@ -74,7 +75,6 @@ require("./passport/")(app);
 // app.set("views", path.join(__dirname, "views"));
 // app.set("view engine", "hbs");
 
-app.use(express.static(path.join(__dirname, "public")));
 
 // app.use(express.static(path.resolve(__dirname, "public/index.html")))
 
