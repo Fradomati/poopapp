@@ -135,7 +135,7 @@ router.post("/modifyProfile", async (req, res) => {
 })
 
 router.get("/whoame", (req, res) => {
-    if (req.user) {
+    if (req.isAuthenticated()) {
         return res.json(
             _.pick(req.user, [
                 "_id",
