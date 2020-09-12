@@ -60,6 +60,7 @@ app.use(
     secret: process.env.SESSION_PASSWORD,
     resave: true,
     saveUninitialized: true,
+    proxy: true,
     cookie: { secure: true },
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
   })
