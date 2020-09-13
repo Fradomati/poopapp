@@ -36,13 +36,14 @@ const app = express();
 // Cross Domain CORS whitlist
 const whitelist = [process.env.FRONTEND_URL];
 const corsOptions = {
-  origin: function (origin, callback) {
+  origin: whitelist[0],
+  /* function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
       callback(new Error("Not allowed by CORS"));
     }
-  },
+  },*/
   credentials: true,
 };
 
