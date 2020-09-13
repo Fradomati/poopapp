@@ -60,10 +60,11 @@ app.use(
     secret: process.env.SESSION_PASSWORD,
     saveUninitialized: true,
     proxy: true,
+    resave: true,
     cookie: {
-      secure: true,
-      httpOnly: false,
-      domain: "127.0.0.1",
+      // secure: true,
+      // httpOnly: false,
+      // domain: "127.0.0.1",
       maxAge: 5184000000 // 60 days 
     },
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
