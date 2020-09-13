@@ -64,6 +64,7 @@ app.use(
     cookie: {
       secure: true,
       httpOnly: false,
+      proxy: undefined,
       // domain: "127.0.0.1",
       maxAge: 5184000000 // 60 days 
     },
