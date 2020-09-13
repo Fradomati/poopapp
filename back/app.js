@@ -59,13 +59,12 @@ app.use(
   session({
     name: "Session_ID",
     secret: process.env.SESSION_PASSWORD,
-    saveUninitialized: true,
-    proxy: true,
+    saveUninitialized: false,
     resave: true,
     cookie: {
       secure: true,
+      sameSite: true,
       httpOnly: false,
-      proxy: undefined,
       // domain: "127.0.0.1",
       maxAge: 5184000000 // 60 days 
     },
