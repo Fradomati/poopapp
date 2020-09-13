@@ -18,7 +18,7 @@ export const signupFn = async ({ mail, password }) => {
 
 export const loginFn = async ({ mail, password }) => {
     let email = mail.toLowerCase()
-    const response = await authService.post("/login", { withCredentials: true }, {
+    const response = await authService.post("/login", {
         email,
         password
     }
