@@ -31,7 +31,7 @@ const debug = require("debug")(
 );
 
 const app = express();
-app.set("trust proxy", 1)
+app.enable("trust proxy", 1)
 app.use(secure)
 
 // Cross Domain CORS whitlist
