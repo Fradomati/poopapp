@@ -31,7 +31,6 @@ const debug = require("debug")(
 );
 
 const app = express();
-app.set("trust proxy", 1)
 // app.use(secure)
 
 // Cross Domain CORS whitlist
@@ -54,6 +53,7 @@ app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.set("trust proxy", 1)
 app.use(
   session({
     name: "Session_ID",
@@ -62,7 +62,7 @@ app.use(
     proxy: true,
     resave: true,
     cookie: {
-      // secure: true,
+      secure: true,
       httpOnly: false,
       // domain: "127.0.0.1",
       maxAge: 5184000000 // 60 days 
