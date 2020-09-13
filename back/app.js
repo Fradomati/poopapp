@@ -63,6 +63,7 @@ app.use(
     cookie: {
       secure: true,
       httpOnly: false,
+      domain: "127.0.0.1",
       maxAge: 5184000000 // 60 days 
     },
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
