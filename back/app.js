@@ -3,7 +3,7 @@ require("dotenv").config();
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const express = require("express");
-const secure = require("express-force-https");
+// const secure = require("express-force-https");
 const mongoose = require("mongoose");
 const logger = require("morgan");
 const path = require("path");
@@ -32,7 +32,7 @@ const debug = require("debug")(
 
 const app = express();
 app.set("trust proxy", 1)
-app.use(secure)
+// app.use(secure)
 
 // Cross Domain CORS whitlist
 const whitelist = [process.env.FRONTEND_URL];
