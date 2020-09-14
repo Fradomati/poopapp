@@ -3,7 +3,6 @@ require("dotenv").config();
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const express = require("express");
-const secure = require("express-force-https");
 const mongoose = require("mongoose");
 const logger = require("morgan");
 const path = require("path");
@@ -31,19 +30,18 @@ const debug = require("debug")(
 );
 
 const app = express();
-app.set("Trust proxy", 1)
-app.use(secure)
 
 // Cross Domain CORS whitlist
 const whitelist = [process.env.FRONTEND_URL];
 const corsOptions = {
-  origin: function (origin, callback) {
+  origin: whitelist[0],
+  /* function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
       callback(new Error("Not allowed by CORS"));
     }
-  },
+  },*/
   credentials: true,
 };
 
@@ -54,12 +52,20 @@ app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.set("trust proxy", 1);
+console.log(app.set("trust proxt", 1), "<----------")
 app.use(
   session({
     name: "Session_ID",
     secret: process.env.SESSION_PASSWORD,
+    saveUninitialized: false,
     resave: true,
-    saveUninitialized: true,
+    cookie: {
+      secure: true,
+      sameSite: "none",
+      httpOnly: false,
+      maxAge: 5184000000 // 60 days 
+    },
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
   })
 );
