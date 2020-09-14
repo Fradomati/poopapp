@@ -3,7 +3,6 @@ require("dotenv").config();
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const express = require("express");
-// const secure = require("express-force-https");
 const mongoose = require("mongoose");
 const logger = require("morgan");
 const path = require("path");
@@ -31,7 +30,6 @@ const debug = require("debug")(
 );
 
 const app = express();
-// app.use(secure)
 
 // Cross Domain CORS whitlist
 const whitelist = [process.env.FRONTEND_URL];
@@ -66,7 +64,6 @@ app.use(
       secure: true,
       sameSite: "none",
       httpOnly: false,
-      // domain: "127.0.0.1",
       maxAge: 5184000000 // 60 days 
     },
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
