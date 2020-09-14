@@ -12,6 +12,10 @@ export const ImgEdit = styled.img`
 width: 1em;
 margin-left: 0.5em;
 `
+export const ImgLogout = styled.img`
+width: 0.8em;
+margin-left: 0.5em;
+`
 export const TitleProfile = styled.p`
     color: #2EC4B6;
     font-size: 1.2em;

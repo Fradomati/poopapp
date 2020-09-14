@@ -12,6 +12,7 @@ import { NavContainer, UlNavbar, LiNavBar, Img } from "./style"
 
 import timers from "../../../public/images/icons/Timers.png"
 import user from "../../../public/images/icons/user.png"
+import content from "../../../public/images/icons/content.png"
 
 /* ERROR EN EL LOGOUT (con el deploy) comprobar si puede ser la etiqueta "Link" */
 
@@ -49,16 +50,19 @@ export const Navbar = withRouter(({ history }) => {
                 {userOn && (
                     <>
                         <LiNavBar>
-                            <Link to="/profile" ><Img src={user}></Img>  </Link>
+                            <Link to="/content" ><Img src={content}></Img>  </Link>
                         </LiNavBar>
                         <LiNavBar>
+                            <Link to="/profile" ><Img src={user}></Img>  </Link>
+                        </LiNavBar>
+                        {/* <LiNavBar>
                             <Link to="/" onClick={async () => {
                                 await logoutFn();
                                 setUserOn(null)
                                 localStorage.setItem("sessionOn", "")
                                 history.push("/login")
                             }} >Logout</Link>
-                        </LiNavBar>
+                        </LiNavBar> */}
                     </>
                 )}
             </UlNavbar>

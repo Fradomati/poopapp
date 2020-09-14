@@ -29,6 +29,10 @@ export const CenterLogo = styled.div`
 export const Logo = styled.img`
 width: 75%;
 height: auto;
+@media (max-width:768px) {
+    width: 75%;
+    height: auto;  
+}
 `
 
 export const test = styled.div`

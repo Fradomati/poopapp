@@ -2,18 +2,20 @@ import React, { useState, useContext } from "react";
 import { useForm } from 'react-hook-form';
 import { modifyFN } from "../../../services/AuthService"
 import { withProtected } from "../../../../lib/Protect/index"
+import { logoutFn } from "../../../services/AuthService"
 
 import { UserInfoContext } from "../../../contexts/UserContext/index"
 
 // Styles 
 
-import { Container, SubContainer, AuthForm } from "../../globalStyles"
-import { Title, Input, InputSend, LinkForgot, textForgot } from "../signup/style"
-import { Ul, Li, TitleProfile, ImgEdit } from "./style"
+import { Container, SubContainer } from "../../globalStyles"
+import { Title, Input } from "../signup/style"
+import { Ul, Li, TitleProfile, ImgEdit, ImgLogout } from "./style"
 
 // images 
 
 import edit from "../../../../public/images/icons/editar.png"
+import logout from "../../../../public/images/icons/logout.png"
 
 
 export const ModifyProfile = withProtected(() => {
@@ -82,7 +84,7 @@ export const ModifyProfile = withProtected(() => {
                             <input type="submit" />
                         </form>
                     )}
-                    <Li><TitleProfile>¿Quieres cambiar la contraseña?</TitleProfile> <ImgEdit src={edit} onClick={() => modify("Pass")} ></ImgEdit></Li>
+                    <Li><TitleProfile>¿Quieres cambiar la contraseña?</TitleProfile> ******* <ImgEdit src={edit} onClick={() => modify("Pass")} ></ImgEdit></Li>
                     {changePass && (
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <Input type="text" placeholder="********" name="password" ref={register({
@@ -91,6 +93,11 @@ export const ModifyProfile = withProtected(() => {
                             <input type="submit" />
                         </form>
                     )}
+                    <Li><TitleProfile >Salir<ImgLogout src={logout} onClick={async () => {
+                        await logoutFn();
+                        setUserOn(null)
+                        localStorage.setItem("sessionOn", "")
+                    }}></ImgLogout></TitleProfile></Li>
                 </Ul>
 
             </SubContainer>

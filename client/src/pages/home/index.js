@@ -71,10 +71,10 @@ export const Home = withProtected(() => {
             const dayFavCal = fnDayWeek(allDays)
             const hourFavCal = fnHourDay(allHours)
 
-
-            setHalfTime(halfTimeCal)
+            console.log(halfTimeCal.hour, !halfTimeCal.hour, halfTimeCal?.hour)
+            if (halfTimeCal.hour) setHalfTime(halfTimeCal)
+            if (lastTimeCal.hour) setLastTime(lastTimeCal)
             setTotalTime(totalTimeCal)
-            setLastTime(lastTimeCal)
             setFavDay(dayFavCal)
             setFavHour(hourFavCal)
         }
@@ -94,7 +94,7 @@ export const Home = withProtected(() => {
                 </Section>
                 <Section>
                     <HightData><Data>{favDay}</Data><TitleData>Día Favorito</TitleData></HightData>
-                    <HightData><Data>{favHour}</Data><TitleData>Hora Favorita</TitleData></HightData>
+                    <HightData><Data>{favHour}:00h</Data><TitleData>Hora Favorita</TitleData></HightData>
                 </Section>
             </MainSection>
         </Container>
