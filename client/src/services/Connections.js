@@ -1,6 +1,7 @@
 import axios from "axios";
 
 axios.defaults.withCredentials = true;
+axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*"
 
 
 export const authService = axios.create({
