@@ -31,6 +31,8 @@ const debug = require("debug")(
 
 const app = express();
 
+app.use(function (req, res, next) { res.header("Access-Control-Allow-Origin", "*"); next() })
+
 // Cross Domain CORS whitlist
 const whitelist = [process.env.FRONTEND_URL];
 const corsOptions = {
