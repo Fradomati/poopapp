@@ -15,7 +15,7 @@ export const withProtected = (Component) => () => {
         return <p>Loading...</p>
     } else {
         if (userOn == false) {
-            return <Redirect to="/signup" />;
+            return <Redirect to="/login" />;
         } else {
             return <Component />;
         }
