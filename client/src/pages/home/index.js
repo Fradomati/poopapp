@@ -72,8 +72,8 @@ export const Home = withProtected(() => {
             const hourFavCal = fnHourDay(allHours)
 
             console.log(halfTimeCal.hour, !halfTimeCal.hour, halfTimeCal?.hour)
-            if (halfTimeCal.hour) setHalfTime(halfTimeCal)
-            if (lastTimeCal.hour) setLastTime(lastTimeCal)
+            if (isNaN(halfTimeCal.hour) != true) setHalfTime(halfTimeCal)
+            if (isNaN(lastTimeCal.hour) = true) setLastTime(lastTimeCal)
             setTotalTime(totalTimeCal)
             setFavDay(dayFavCal)
             setFavHour(hourFavCal)
