@@ -19,7 +19,7 @@ import content from "../../../public/images/icons/content.png"
 
 export const Navbar = withRouter(({ history }) => {
 
-    const { userOn, setUserOn } = useContext(UserInfoContext)
+    const [userOn, setUserOn] = useContext(UserInfoContext)
 
     const doLogout = async () => {
         await logoutFn();
