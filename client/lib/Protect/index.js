@@ -6,7 +6,7 @@ import { UserInfoContext } from "../../src/contexts/UserContext/index"
 
 export const withProtected = (Component) => () => {
 
-    const { userOn } = useContext(UserInfoContext);
+    const [userOn] = useContext(UserInfoContext);
 
     console.log("WithProtect", userOn)
 

@@ -20,7 +20,7 @@ import logout from "../../../../public/images/icons/logout.png"
 
 export const ModifyProfile = withProtected(() => {
 
-    const { userOn, setUserOn } = useContext(UserInfoContext)
+    const [userOn, setUserOn] = useContext(UserInfoContext)
     const [changeUser, setChangeUser] = useState(null)
     const [changeEmail, setChangeEmail] = useState(null)
     const [changePass, setChangePass] = useState(null)

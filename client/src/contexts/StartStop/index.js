@@ -17,7 +17,7 @@ import logoAnimated from "../../../public/images/icons/Poop-Time-gif.gif"
 export const StartStopContext = createContext();
 
 export const StartStopButton = props => {
-    const { userOn, setUserOn, setUserSession } = useContext(UserInfoContext)
+    const [userOn, setUserOn] = useContext(UserInfoContext)
     const { updateUser, setUpdateUser } = useState({ userOn })
 
 
@@ -113,14 +113,6 @@ export const StartStopButton = props => {
         }
     }
 
-    // useEffect(() => {
-    //     async function up() {
-    //         const update = await whoameFN()
-    //         setUserOn(update)
-    //         console.log(userOn)
-    //     }
-    //     up()
-    // }, [currTime])
 
 
     return (

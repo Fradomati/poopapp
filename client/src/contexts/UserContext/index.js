@@ -28,9 +28,10 @@ export const UserInfoProvider = (props) => {
 
 
 
+
     return (
 
-        <UserInfoContext.Provider value={{ userOn, setUserOn, setUserSession }}>
+        <UserInfoContext.Provider value={[userOn, setUserOn]}>
             {props.children}
         </UserInfoContext.Provider>
     )

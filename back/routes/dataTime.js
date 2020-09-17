@@ -34,5 +34,35 @@ router.post("/sendTime", async (req, res) => {
     ]))
 })
 
+router.post("/removeLastSession", async (req, res) => {
+    const { id } = req.body
+    await User.findOneAndUpdate(
+        { _id: id },
+        {
+            $pop: {
+                days: 1,
+                hours: 1,
+                totalTimes: 1
+            }
+        }
+    )
+
+    const update = await User.findById(id)
+
+    res.json(_.pick(update, [
+        "_id",
+        "username",
+        "password",
+        "email",
+        "totalTimes",
+        "lastTime",
+        "days",
+        "hours",
+        "refContent",
+        "storeContent",
+        "likesContent"
+    ]))
+})
+
 
 module.exports = router
