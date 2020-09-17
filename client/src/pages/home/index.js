@@ -1,9 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { StartStopContext } from "../../contexts/StartStop/index"
 import { UserInfoContext } from "../../contexts/UserContext/index"
-import { UserSessionContext } from "../../../lib/Authentication/withAuthentication"
-import { Redirect } from "react-router-dom";
-import { fnHalfTime, fnSumTime, fnDayWeek, fnHourDay, fnMountTime } from "../../../lib/ApiFiles/Api_Timer"
 import { withProtected } from "../../../lib/Protect/index"
 
 // Styles
@@ -11,39 +8,48 @@ import { withProtected } from "../../../lib/Protect/index"
 import { MainSection, Section, HightData, TitleData, Data, DataDivs, TimeDetails } from "./style"
 import { Container } from "../globalStyles"
 
+// Api & Services
+
+import { fnHalfTime, fnSumTime, fnDayWeek, fnHourDay, fnMountTime } from "../../../lib/ApiFiles/Api_Timer"
+import { rmLastSessionFN } from "../../services/DataService"
+
+// Components
+
+import { RemoveButton } from "../../components/remove_last_session_button/index"
+
+
 export const Home = withProtected(() => {
 
     // CONTEXTS
     const { start, time, currTime } = useContext(StartStopContext)
-    const { userOn } = useContext(UserInfoContext)
-    const { userSession, noneSession } = useContext(UserSessionContext)
+    const [userOn, setUserOn] = useContext(UserInfoContext)
 
-    // STATES OF USER
-    const [session, setSession] = useState()
-    const [closeSession, setCloseSession] = useState()
 
-    // STATES OF DATA TIMERS
+    // STATES OF DATA TIMERS 
 
+    const initialTimer = { hour: 0, min: 0, sec: 0 }
     const [timer, setTimer] = useState("Nothing")
-    const [halfTime, setHalfTime] = useState({ hour: 0, min: 0, sec: 0 })
-    const [lastTime, setLastTime] = useState({ hour: 0, min: 0, sec: 0 })
-    const [totalTime, setTotalTime] = useState({ hour: 0, min: 0, sec: 0 })
+    const [halfTime, setHalfTime] = useState(initialTimer)
+    const [lastTime, setLastTime] = useState(initialTimer)
+    const [totalTime, setTotalTime] = useState(initialTimer)
     const [favDay, setFavDay] = useState("Ninguno")
     const [favHour, setFavHour] = useState("Ninguna")
+
+
 
     // Check session on ON "LOCAL STORAGE"
     //  const session = localStorage.getItem("sessionOn")
 
 
-    // If there are session on, then it set "Session" to hide the "Loading" and show the data.
-    useEffect(() => {
-        if (userSession) setSession(true)
-    }, [userSession])
+    // // If there are session on, then it set "Session" to hide the "Loading" and show the data.
+    // useEffect(() => {
+    //     if (userSession) setSession(true)
+    // }, [userSession])
 
-    // If there aren't session on, then it set "Close Session" to redirect user to login
-    useEffect(() => {
-        if (noneSession) setCloseSession(true)
-    }, [noneSession])
+    // // If there aren't session on, then it set "Close Session" to redirect user to login
+    // useEffect(() => {
+    //     if (noneSession) setCloseSession(true)
+    // }, [noneSession])
 
     // Check time
 
@@ -72,20 +78,41 @@ export const Home = withProtected(() => {
             const hourFavCal = fnHourDay(allHours)
 
             console.log(halfTimeCal.hour, !halfTimeCal.hour, halfTimeCal?.hour)
+<<<<<<< HEAD
             if (isNaN(halfTimeCal.hour) != true) setHalfTime(halfTimeCal)
             if (isNaN(lastTimeCal.hour) != true) setLastTime(lastTimeCal)
+=======
+            isNaN(halfTimeCal.hour != true) ? setHalfTime(halfTimeCal) : setHalfTime(initialTimer)
+            isNaN(lastTimeCal.hour) != true ? setLastTime(lastTimeCal) : setLastTime(initialTimer)
+>>>>>>> 3995bd4df4d2a7eb36c667d69422f57faca9a597
             setTotalTime(totalTimeCal)
             setFavDay(dayFavCal)
             setFavHour(hourFavCal)
         }
-    }, [userOn])
+    }, [userOn, setUserOn])
 
+
+    const removeSession = () => {
+        console.log("Remove last session")
+        if (lastTime.hour == 0 && lastTime.min == 0 && lastTime.sec == 0) {
+            console.log("There are not session")
+        } else {
+            console.log("Let go remove")
+            const id = userOn?._id
+            rmLastSessionFN({ id }).then(response => {
+                console.log("Update user", response)
+                setUserOn(response)
+            })
+        }
+    }
 
     return (
         <Container>
             <MainSection>
                 <Section>
-                    <HightData> {currTime && <Data><DataDivs>{currTime.hour}<TimeDetails>hr</TimeDetails></DataDivs><DataDivs> {currTime.min}<TimeDetails>mn</TimeDetails> </DataDivs><DataDivs>{currTime.sec}<TimeDetails>sc</TimeDetails></DataDivs></Data>}<TitleData>Actual</TitleData></HightData>
+                    <HightData> {currTime && <Data><DataDivs>{currTime.hour}<TimeDetails>hr</TimeDetails></DataDivs><DataDivs> {currTime.min}<TimeDetails>mn</TimeDetails> </DataDivs><DataDivs>{currTime.sec}<TimeDetails>sc</TimeDetails></DataDivs></Data>}<TitleData onClick={() => {
+                        removeSession()
+                    }}><RemoveButton value={{ lastTime }} />¿Eliminar última sesión?</TitleData></HightData>
                 </Section>
                 <Section>
                     <HightData><Data><DataDivs>{lastTime.hour}<TimeDetails>hr</TimeDetails></DataDivs><DataDivs>{lastTime.min}<TimeDetails>mn</TimeDetails></DataDivs><DataDivs>{lastTime.sec}<TimeDetails>sc</TimeDetails></DataDivs></Data><TitleData>Última vez</TitleData> </HightData>

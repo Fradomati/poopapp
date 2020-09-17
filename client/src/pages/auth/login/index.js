@@ -16,7 +16,7 @@ import { P } from "./style"
 import logo from "../../../../public/images/icons/Pooptime-Logo2.png"
 
 export const Login = withRouter(({ history }) => {
-    const { setUserOn } = useContext(UserInfoContext)
+    const [userOn, setUserOn] = useContext(UserInfoContext)
     const [err, setErr] = useState()
 
 
