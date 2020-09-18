@@ -1,11 +1,18 @@
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 import { UserInfoContext } from "../../contexts/UserContext/index"
 
-
+// Styles
+import { ImgRM } from "./style"
 
 // Api & Services 
 
 import { rmLastSessionFN } from "../../services/DataService"
+
+// Images
+import yes from "../../../public/images/icons/yes_dark.png"
+import not from "../../../public/images/icons/not_dark.png"
+import remove from "../../../public/images/icons/remove_dark.png"
+
 
 
 
@@ -14,8 +21,13 @@ export const RemoveButton = ({ value }) => {
     // Context Resource
     const [userOn, setUserOn] = useContext(UserInfoContext)
 
+    // Confirmation Pre-remove
+
+    const [accept, setAccept] = useState(false);
+
 
     const { lastTime } = value
+
 
 
     const removeSession = () => {
@@ -25,11 +37,19 @@ export const RemoveButton = ({ value }) => {
             const id = userOn?._id
             rmLastSessionFN({ id }).then(response => {
                 setUserOn(response)
+                setAccept(false)
+
             })
         }
     }
 
 
-    return <button onClick={() => { removeSession() }}>Remove</button>
+    return (
+        <>
+            {accept && (<div><ImgRM src={not} onClick={() => { setAccept(false) }} ></ImgRM>
+                <ImgRM src={yes} onClick={() => { removeSession() }}></ImgRM></div>)}
+            {!accept && (<div><ImgRM src={remove} onClick={() => { setAccept(true) }}></ImgRM></div>)}
+        </>
+    )
 
 }
