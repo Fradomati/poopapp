@@ -17,6 +17,12 @@ import { rmLastSessionFN } from "../../services/DataService"
 
 import { RemoveButton } from "../../components/remove_last_session_button/index"
 
+// Images 
+
+import remove from "../../../public/images/icons/remove.png"
+import not from "../../../public/images/icons/not.png"
+
+
 
 export const Home = withProtected(() => {
 
@@ -36,22 +42,6 @@ export const Home = withProtected(() => {
     const [favHour, setFavHour] = useState("Ninguna")
 
 
-
-    // Check session on ON "LOCAL STORAGE"
-    //  const session = localStorage.getItem("sessionOn")
-
-
-    // // If there are session on, then it set "Session" to hide the "Loading" and show the data.
-    // useEffect(() => {
-    //     if (userSession) setSession(true)
-    // }, [userSession])
-
-    // // If there aren't session on, then it set "Close Session" to redirect user to login
-    // useEffect(() => {
-    //     if (noneSession) setCloseSession(true)
-    // }, [noneSession])
-
-    // Check time
 
     useEffect(() => {
         if (time != "") {
@@ -78,13 +68,17 @@ export const Home = withProtected(() => {
             const hourFavCal = fnHourDay(allHours)
 
             console.log(halfTimeCal.hour, !halfTimeCal.hour, halfTimeCal?.hour)
-            isNaN(halfTimeCal.hour != true) ? setHalfTime(halfTimeCal) : setHalfTime(initialTimer)
+            isNaN(halfTimeCal.hour) != true ? setHalfTime(halfTimeCal) : setHalfTime(initialTimer)
             isNaN(lastTimeCal.hour) != true ? setLastTime(lastTimeCal) : setLastTime(initialTimer)
             setTotalTime(totalTimeCal)
             setFavDay(dayFavCal)
             setFavHour(hourFavCal)
         }
-    }, [userOn, setUserOn])
+    }, [userOn])
+
+
+
+
 
 
     const removeSession = () => {
@@ -105,18 +99,70 @@ export const Home = withProtected(() => {
         <Container>
             <MainSection>
                 <Section>
-                    <HightData> {currTime && <Data><DataDivs>{currTime.hour}<TimeDetails>hr</TimeDetails></DataDivs><DataDivs> {currTime.min}<TimeDetails>mn</TimeDetails> </DataDivs><DataDivs>{currTime.sec}<TimeDetails>sc</TimeDetails></DataDivs></Data>}<TitleData onClick={() => {
-                        removeSession()
-                    }}><RemoveButton value={{ lastTime }} />¿Eliminar última sesión?</TitleData></HightData>
+                    <RemoveButton value={{ lastTime }} />
+                    <HightData>
+                        <Data>
+                            <DataDivs>
+                                {lastTime.hour}
+                                <TimeDetails>hr</TimeDetails>
+                            </DataDivs>
+                            <DataDivs>
+                                {lastTime.min}
+                                <TimeDetails>mn</TimeDetails>
+                            </DataDivs>
+                            <DataDivs>
+                                {lastTime.sec}
+                                <TimeDetails>sc</TimeDetails>
+                            </DataDivs>
+                        </Data>
+                        <TitleData>Última vez</TitleData>
+                    </HightData>
                 </Section>
                 <Section>
-                    <HightData><Data><DataDivs>{lastTime.hour}<TimeDetails>hr</TimeDetails></DataDivs><DataDivs>{lastTime.min}<TimeDetails>mn</TimeDetails></DataDivs><DataDivs>{lastTime.sec}<TimeDetails>sc</TimeDetails></DataDivs></Data><TitleData>Última vez</TitleData> </HightData>
-                    <HightData><Data><DataDivs>{halfTime.hour}<TimeDetails>hr</TimeDetails> </DataDivs><DataDivs>{halfTime.min}<TimeDetails>mn</TimeDetails> </DataDivs><DataDivs>{halfTime.sec}<TimeDetails>sc</TimeDetails></DataDivs></Data><TitleData>Tiempo Medio</TitleData></HightData>
-                    <HightData><Data><DataDivs>{totalTime.hour}<TimeDetails>hr</TimeDetails> </DataDivs><DataDivs>{totalTime.min}<TimeDetails>mn</TimeDetails> </DataDivs><DataDivs>{totalTime.sec}<TimeDetails>sc</TimeDetails></DataDivs></Data><TitleData>Tiempo Total</TitleData></HightData>
+                    <HightData>
+                        <Data>
+                            <DataDivs>
+                                {halfTime.hour}
+                                <TimeDetails>hr</TimeDetails>
+                            </DataDivs>
+                            <DataDivs>
+                                {halfTime.min}
+                                <TimeDetails>mn</TimeDetails>
+                            </DataDivs>
+                            <DataDivs>
+                                {halfTime.sec}
+                                <TimeDetails>sc</TimeDetails>
+                            </DataDivs>
+                        </Data>
+                        <TitleData>Tiempo Medio</TitleData>
+                    </HightData>
+                    <HightData>
+                        <Data>
+                            <DataDivs>
+                                {totalTime.hour}
+                                <TimeDetails>hr</TimeDetails>
+                            </DataDivs>
+                            <DataDivs>
+                                {totalTime.min}
+                                <TimeDetails>mn</TimeDetails>
+                            </DataDivs>
+                            <DataDivs>
+                                {totalTime.sec}
+                                <TimeDetails>sc</TimeDetails>
+                            </DataDivs>
+                        </Data>
+                        <TitleData>Tiempo Total</TitleData>
+                    </HightData>
                 </Section>
                 <Section>
-                    <HightData><Data>{favDay}</Data><TitleData>Día Favorito</TitleData></HightData>
-                    <HightData><Data>{favHour}:00h</Data><TitleData>Hora Favorita</TitleData></HightData>
+                    <HightData>
+                        <Data>{favDay}</Data>
+                        <TitleData>Día Favorito</TitleData>
+                    </HightData>
+                    <HightData>
+                        <Data>{favHour}:00h</Data>
+                        <TitleData>Hora Favorita</TitleData>
+                    </HightData>
                 </Section>
             </MainSection>
         </Container>
