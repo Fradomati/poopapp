@@ -9,6 +9,7 @@ import { Login } from "../src/pages/auth/login/index"
 import { ForgotPassword } from "../src/pages/auth/forgotPW/index"
 import { ModifyProfile } from "../src/pages/auth/modifyProfile/index"
 import { Content } from "../src/pages/content/index"
+import { AddContent } from "../src/pages/content/addContent/index"
 // LIB
 import { withAuthentication } from "../lib/Authentication/withAuthentication"
 
@@ -29,7 +30,8 @@ export const App = withAuthentication(() => {
                             <Route path="/login" exact component={Login} />
                             <Route path="/forgot-password" exact component={ForgotPassword} />
                             <Route path="/profile" exact component={ModifyProfile} />
-                            <Route parth="/content" exact component={Content} />
+                            <Route path="/content" exact component={Content} />
+                            <Route path="/addContent" exact component={AddContent} />
                         </Switch>
                     </StartStopButton>
                 </Layout>

@@ -99,7 +99,7 @@ export const Home = withProtected(() => {
         <Container>
             <MainSection>
                 <Section>
-                    <RemoveButton value={{ lastTime }} />
+
                     <HightData>
                         <Data>
                             <DataDivs>
@@ -115,7 +115,7 @@ export const Home = withProtected(() => {
                                 <TimeDetails>sc</TimeDetails>
                             </DataDivs>
                         </Data>
-                        <TitleData>Última vez</TitleData>
+                        <RemoveButton value={{ lastTime }} />
                     </HightData>
                 </Section>
                 <Section>
