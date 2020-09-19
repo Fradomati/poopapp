@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react"
 import { UserInfoContext } from "../../contexts/UserContext/index"
 
 // Styles
-import { ImgRM } from "./style"
+import { ImgRM, ContentBtn, TitleDataBtn } from "./style"
 
 // Api & Services 
 
@@ -45,11 +45,11 @@ export const RemoveButton = ({ value }) => {
 
 
     return (
-        <>
-            {accept && (<div><ImgRM src={not} onClick={() => { setAccept(false) }} ></ImgRM>
-                <ImgRM src={yes} onClick={() => { removeSession() }}></ImgRM></div>)}
-            {!accept && (<div><ImgRM src={remove} onClick={() => { setAccept(true) }}></ImgRM></div>)}
-        </>
+        <div>
+            {accept && (<ContentBtn><ImgRM src={not} onClick={() => { setAccept(false) }} ></ImgRM>
+                <ImgRM src={yes} onClick={() => { removeSession() }}></ImgRM></ContentBtn>)}
+            {!accept && (<ContentBtn><TitleDataBtn>Última vez</TitleDataBtn><ImgRM src={remove} onClick={() => { setAccept(true) }}></ImgRM></ContentBtn>)}
+        </div>
     )
 
 }

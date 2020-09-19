@@ -27,11 +27,11 @@ export const CenterLogo = styled.div`
     top: -12vh;
 `
 export const Logo = styled.img`
-width: 75%;
+width: 15.5em;
 height: auto;
 @media (max-width:768px) {
-    width: 75%;
-    height: auto;  
+    width: 250px;
+    height: 100px; 
 }
 `
 
