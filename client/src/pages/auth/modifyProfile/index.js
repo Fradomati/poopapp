@@ -4,6 +4,8 @@ import { modifyFN } from "../../../services/AuthService"
 import { withProtected } from "../../../../lib/Protect/index"
 import { logoutFn } from "../../../services/AuthService"
 
+// Context
+
 import { UserInfoContext } from "../../../contexts/UserContext/index"
 
 // Styles 

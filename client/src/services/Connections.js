@@ -18,3 +18,9 @@ export const OnlineService = axios.create({
     baseURL: `${process.env.BACKEND_URL}/onlinesUser`,
     withCredentials: true
 })
+
+export const contentService = axios.create({
+    baseURL: `${process.env.BACKEND_URL}/content`,
+    withCredentials: true
+
+})

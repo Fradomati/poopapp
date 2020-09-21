@@ -44,3 +44,21 @@ font-size: 0.8em;
 margin: 0 0 0.5em 0;
 color: #ff284e;
 `
+
+export const InputSelect = styled.select`
+background-color: #011728;
+border: 1px solid #2ec4b6;
+padding: 0.5em;
+margin-bottom: 0.5em;
+::placeholder,
+::-webkit-input-placeholder {
+  color: #ecececbf;
+}
+:-ms-input-placeholder {
+   color: #ecececbf;
+}
+&:focus {
+    color: white;
+}
+color: #2EC4B6;
+    `
