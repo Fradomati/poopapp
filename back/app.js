@@ -107,7 +107,12 @@ app.use("/dataTime", dataTime);
 
 // Online User
 
-const OnlineUser = require("./routes/onlineUser");
-app.use("/onlinesUser", OnlineUser);
+const onlineUser = require("./routes/onlineUser");
+app.use("/onlinesUser", onlineUser);
+
+// Content
+
+const content = require("./routes/content");
+app.use("/content", content)
 
 module.exports = app;
