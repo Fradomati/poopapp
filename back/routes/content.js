@@ -19,8 +19,21 @@ router.post("/addContent", async (req, res) => {
 
     console.log("Nuevo contenido", newContent)
 
-    res.json({ status: 200, message: `Nuevo contenido agreado a ${category}` })
+    res.json({ status: 200, message: `¡Genial! Has agregado a ${category}: "${title}" `, title: title, category: category })
 
+
+})
+
+
+router.get("/findAll", async (req, res) => {
+
+    await Content.find({}, (err, result) => {
+        if (err) {
+            res.json({ status: 500, message: "No hay contenido" })
+        } else {
+            res.json(result)
+        }
+    })
 
 })
 

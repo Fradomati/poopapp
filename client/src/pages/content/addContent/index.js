@@ -10,8 +10,9 @@ import { UserInfoContext } from "../../../contexts/UserContext"
 // Styles 
 
 import { Input, InputSend, Title } from "../../auth/signup/style"
-import { Container, SubContainer, AuthForm, InputSelect } from "../../globalStyles"
+import { Container, AuthForm, InputSelect } from "../../globalStyles"
 import { TitleProfile } from "../../auth/modifyProfile/style"
+import { ContainerAdd, TextAdded } from "./style"
 
 
 
@@ -38,18 +39,16 @@ export const AddContent = withProtected(() => {
     const onSubmit = async (data, e) => {
         // Add id to obj
         data.id = userOn._id
-        console.log(data)
         const responseServer = await addContentFN(data)
-        console.log(responseServer.message)
-        setMessage(responseServer.message)
+        setMessage({ title: responseServer.title, category: responseServer.category })
         e.target.reset();
     };
-    console.log(errors);
+    if (errors) console.log(errors);
 
     return (
         <Container>
-            <SubContainer>
-                {message && (<p>{message}</p>)}
+            <ContainerAdd>
+                {message && (<TextAdded>¡Genial! Has agregado a <b>{message.category}</b>:<br /> <b>"{message.title}"</b></TextAdded>)}
                 <AuthForm onSubmit={handleSubmit(onSubmit)}>
                     <Title>Añadir Contenido</Title>
                     <TitleProfile>Título</TitleProfile>
@@ -82,7 +81,7 @@ export const AddContent = withProtected(() => {
 
                     <InputSend type="submit" />
                 </AuthForm>
-            </SubContainer>
+            </ContainerAdd>
         </Container>
     );
 })
