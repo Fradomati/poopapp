@@ -7,7 +7,13 @@ import { getContentFN } from "../../services/ContentService"
 // Styles
 
 import { Container, A } from "../globalStyles"
-import { CntDiv, UlCnt, LiCnt, DivInfo, DivTitle } from "./style"
+import { CntDiv, UlCnt, LiCnt, DivInfo, DivTitle, DivBot, Icon } from "./style"
+
+// Img
+
+import time from "../../../public/images/icons/time.png"
+import tag from "../../../public/images/icons/tag.png"
+
 
 
 
@@ -32,10 +38,10 @@ export const Content = withProtected(() => {
                             <A href={cnt.url}>{cnt.title}</A>
                         </DivTitle>
                         <DivInfo>
-                            <div>{cnt.time}</div>
-                            <div>{cnt.category}</div>
-                            <div>Like</div>
-                            <div>Dislike</div>
+                            <DivBot><Icon src={time}></Icon>{cnt.time} min</DivBot>
+                            <DivBot><Icon src={tag}></Icon>{cnt.category}</DivBot>
+                            <DivBot>Like</DivBot>
+                            <DivBot>Dislike</DivBot>
                         </DivInfo>
                     </LiCnt>
                 }))}

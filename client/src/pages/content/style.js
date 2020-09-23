@@ -37,3 +37,13 @@ display: flex;
 justify-content: space-evenly;
 padding: 0.5em 0;
 `
+
+export const DivBot = styled.div`
+font-size: 0.8em;
+color: #969696
+`
+
+export const Icon = styled.img`
+width: 0.8em;
+margin-right: 0.3em;
+`
