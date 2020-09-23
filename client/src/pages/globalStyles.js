@@ -62,3 +62,8 @@ margin-bottom: 0.5em;
 }
 color: #2EC4B6;
     `
+
+export const A = styled.a`
+text-decoration: none;
+color: #2EC4B6;
+`
