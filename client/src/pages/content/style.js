@@ -18,6 +18,7 @@ overflow: auto;
 ::-webkit-scrollbar {
     display: none;
 }
+padding-bottom: 15vh;
 `
 
 export const LiCnt = styled.li`
@@ -47,3 +48,10 @@ export const Icon = styled.img`
 width: 0.8em;
 margin-right: 0.3em;
 `
+
+export const AddBtn = styled.div`
+margin: 0.8em 0;
+padding: 0.5em 2em;
+background-color: #21908c;
+border-radius: 2em;
+` 
