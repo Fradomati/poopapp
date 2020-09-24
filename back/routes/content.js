@@ -26,7 +26,6 @@ router.post("/addContent", async (req, res) => {
 
 
 router.get("/findAll", async (req, res) => {
-
     await Content.find({}, (err, result) => {
         if (err) {
             res.json({ status: 500, message: "No hay contenido" })

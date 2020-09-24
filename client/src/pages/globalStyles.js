@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom"
 
 export const Container = styled.div`
 background-color: transparent;
@@ -66,4 +67,10 @@ color: #2EC4B6;
 export const A = styled.a`
 text-decoration: none;
 color: #2EC4B6;
+`
+
+export const LinkTo = styled(Link)`
+text-decoration: none;
+color: white;
+font-size: 1.5em
 `

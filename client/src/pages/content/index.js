@@ -6,8 +6,8 @@ import { getContentFN } from "../../services/ContentService"
 
 // Styles
 
-import { Container, A } from "../globalStyles"
-import { CntDiv, UlCnt, LiCnt, DivInfo, DivTitle, DivBot, Icon } from "./style"
+import { Container, A, LinkTo } from "../globalStyles"
+import { CntDiv, UlCnt, LiCnt, DivInfo, DivTitle, DivBot, Icon, AddBtn } from "./style"
 
 // Img
 
@@ -29,7 +29,9 @@ export const Content = withProtected(() => {
     }, [])
 
     return <Container>
-        <div><Link to="/addContent">Add content Here</Link></div>
+        <CntDiv>
+            <AddBtn><LinkTo to="/addContent">+</LinkTo></AddBtn>
+        </CntDiv>
         <CntDiv>
             <UlCnt>
                 {allCnt && (allCnt.map((cnt, i) => {
