@@ -54,7 +54,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.set("trust proxy", 1);
-console.log(app.set("trust proxt", 1), "<----------")
 app.use(
   session({
     name: "Session_ID",
