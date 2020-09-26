@@ -37,6 +37,45 @@ router.get("/findAll", async (req, res) => {
 })
 
 
+router.post("/findCategory", async (req, res) => {
+    const { category, time } = req.body
+
+    if (time === "-") {
+        await Content.find({
+            category: category
+        }, (err, result) => {
+            if (err) {
+                res.json({ status: 500, message: "No hay contenido" })
+            } else {
+                res.json(result)
+            }
+        })
+    } else if (category === "-") {
+        await Content.find({
+            time: time
+        }, (err, result) => {
+            if (err) {
+                res.json({ status: 500, message: "No hay contenido" })
+            } else {
+                res.json(result)
+            }
+        })
+    } else {
+        await Content.find({
+            category: category,
+            time: time
+        }, (err, result) => {
+            if (err) {
+                res.json({ status: 500, message: "No hay contenido" })
+            } else {
+                res.json(result)
+            }
+        })
+    }
+})
+
+
+
 
 
 

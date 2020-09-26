@@ -14,12 +14,10 @@ const { passWordGenerator } = require("../lib/automaticGenerator")
 
 router.post("/login", (req, res) => {
     passport.authenticate("local", (err, user, failureDetails) => {
-        console.log("LOCAL", user)
         if (err) {
             console.log("err:", err);
             return res.json({ status: 417, message: "El email o la contraseña son incorrectos" });
         }
-        console.log("el usuario", user);
         if (!user) {
             return res.json({ status: 417, message: "El email o la contraseña son incorrectos" });
         }

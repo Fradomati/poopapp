@@ -9,3 +9,8 @@ export const getContentFN = async () => {
     const response = await contentService.get("/findAll")
     return response.data
 }
+
+export const getCategoryFn = async ({ category, time }) => {
+    const response = await contentService.post("/findCategory", { category, time })
+    return response.data
+}
