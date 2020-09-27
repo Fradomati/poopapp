@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Content = require("../models/Content_Model");
+const User = require("../models/User_Model")
 const passport = require("passport");
 const _ = require("lodash");
 
@@ -74,9 +75,81 @@ router.post("/findCategory", async (req, res) => {
     }
 })
 
+/*
+
+Dos modelos, User y Content.
+
+Básico:
+
+- Si un usuario le da a like_1, mandamos un "true" de like_1, el ID del contenido y el ID del usuario. 
+- Con el "True" confirmamos qué opción a marcado.
+- Buscamos el contenido marcado y le agregamos el "ID de Usuario" a like_1 (modelo content)
+- Por otro lado, buscamos al usuario y le agregamos el "ID de Content" a su like_1 (modelo user)
+- Solo puede haber seleccionado una opción.
+
+Caso 1 - Desmarcar:
+
+- Solo puede haber 1 like/dislike por artículo, por lo que si vuelve a pulsar en la misma opción
+el resultado sería "desmarcar" la opción por lo que se debe borrar el ID tanto del Modelo User como del Modelo Content.
 
 
+IDEA: ¿Es necesario que haya dislike?
 
+*/
+router.post("/likeButton", async (req, res) => {
+    const { like_1, id_cnt, id_user } = req.body
+
+    console.log("LIKE------", like_1, id_cnt, id_user)
+
+    if (like_1 === true) {
+
+        console.log("AHORA CONTENT")
+        await Content.findByIdAndUpdate(
+            { _id: id_cnt },
+            {
+                $push: {
+                    like_1: id_user
+                }
+            }
+        )
+        console.log("AHORA USER")
+        await User.findByIdAndUpdate(
+            { _id: id_user },
+            {
+                $push: {
+                    likesContent: {
+                        1: id_cnt
+                    }
+                }
+            }
+        )
+        res.json({ status: 200, message: `Marcado` })
+    } else {
+        await Content.findByIdAndUpdate(
+            { _id: id_cnt },
+            {
+                $pull: {
+                    like_1: id_user
+                }
+            }, (err) => {
+                console.log(err)
+            }
+        )
+        await User.findByIdAndUpdate(
+            { _id: id_user },
+            {
+                likesContent: {
+                    $pull: {
+                        1: id_cnt
+                    }
+                }
+            }, (err) => {
+                console.log(err)
+            }
+        )
+        res.json({ status: 200, message: "Desmarcado" })
+    }
+})
 
 
 module.exports = router;
