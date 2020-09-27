@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useContext } from "react"
 import { Link } from "react-router-dom"
 import { withProtected } from "../../../lib/Protect"
-import { getContentFN, getCategoryFn } from "../../services/ContentService"
+import { getContentFN, getCategoryFn, likeBtn } from "../../services/ContentService"
+import { UserInfoContext } from "../../contexts/UserContext/index"
 import { useForm } from "react-hook-form"
 
 
@@ -21,6 +22,7 @@ import tag from "../../../public/images/icons/tag.png"
 export const Content = withProtected(() => {
 
     const [allCnt, setAllCnt] = useState()
+    const [userOn, setUserOn] = useContext(UserInfoContext)
 
     useEffect(() => {
         getContentFN().then(e => {
@@ -49,6 +51,11 @@ export const Content = withProtected(() => {
     };
     if (errors) console.log(errors);
 
+
+    const goLike = async ({ like_1, id_cnt, id_user }) => {
+        const responseServer = await likeBtn({ like_1, id_cnt, id_user })
+        console.log(responseServer)
+    }
 
 
 
@@ -92,8 +99,7 @@ export const Content = withProtected(() => {
                         <DivInfo>
                             <DivBot onClick={() => onSubmit({ category: "-", time: cnt.time })} > <Icon src={time}></Icon>{cnt.time} min</DivBot>
                             <DivBot onClick={() => onSubmit({ category: cnt.category, time: "-" })}><Icon src={tag}></Icon>{cnt.category}</DivBot>
-                            <DivBot>Like</DivBot>
-                            <DivBot>Dislike</DivBot>
+                            <DivBot onClick={() => goLike({ like_1: true, id_cnt: cnt._id, id_user: userOn._id })}>Like</DivBot>
                         </DivInfo>
                     </LiCnt>
                 }))}
