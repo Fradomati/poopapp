@@ -12,12 +12,7 @@ const UserModel = new Schema(
         hours: [{ type: Number }],
         refContent: [{ type: Schema.Types.ObjectId, ref: "Content" }],
         storeContent: { type: Array, default: [] },
-        likesContent: {
-            1: [{ type: Schema.Types.ObjectId, ref: "Content" }],
-            2: [{ type: Schema.Types.ObjectId, ref: "Content" }],
-            3: [{ type: Schema.Types.ObjectId, ref: "Content" }],
-            4: [{ type: Schema.Types.ObjectId, ref: "Content" }]
-        }
+        likesContent: [{ type: Schema.Types.ObjectId, ref: "Content" }]
     },
     {
         timestamps: true,
