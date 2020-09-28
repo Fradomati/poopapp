@@ -121,7 +121,9 @@ router.post("/likeButton", async (req, res) => {
                 }
             }
         )
-        res.json({ status: 200, message: `Marcado` })
+        const updateCnt = await Content.findById(id_cnt)
+        const updateUser = await User.findById(id_user)
+        res.json({ updateCnt, updateUser })
     } else {
         await Content.findByIdAndUpdate(
             { _id: id_cnt },
