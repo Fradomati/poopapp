@@ -117,13 +117,13 @@ router.post("/likeButton", async (req, res) => {
             { _id: id_user },
             {
                 $push: {
-                    likesContent: {
-                        1: id_cnt
-                    }
+                    likesContent: id_cnt
                 }
             }
         )
-        res.json({ status: 200, message: `Marcado` })
+        const updateCnt = await Content.findById(id_cnt)
+        const updateUser = await User.findById(id_user)
+        res.json({ updateCnt, updateUser })
     } else {
         await Content.findByIdAndUpdate(
             { _id: id_cnt },
@@ -131,20 +131,14 @@ router.post("/likeButton", async (req, res) => {
                 $pull: {
                     like_1: id_user
                 }
-            }, (err) => {
-                console.log(err)
             }
         )
         await User.findByIdAndUpdate(
             { _id: id_user },
             {
-                likesContent: {
-                    $pull: {
-                        1: id_cnt
-                    }
+                $pull: {
+                    likesContent: id_cnt
                 }
-            }, (err) => {
-                console.log(err)
             }
         )
         res.json({ status: 200, message: "Desmarcado" })

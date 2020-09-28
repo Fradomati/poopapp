@@ -55,8 +55,20 @@ export const Content = withProtected(() => {
     const goLike = async ({ like_1, id_cnt, id_user }) => {
         const responseServer = await likeBtn({ like_1, id_cnt, id_user })
         console.log(responseServer)
+        const updateContent = responseServer.updateCnt
+        const updateUser = responseServer.updateUser
+
+        console.log(updateContent.like_1, "Likes on content")
+        setUserOn(updateUser)
     }
 
+    const counter = (data) => {
+        if (data.length) {
+            return data.length
+        } else {
+            return 0
+        }
+    }
 
 
     return <Container>
@@ -99,7 +111,7 @@ export const Content = withProtected(() => {
                         <DivInfo>
                             <DivBot onClick={() => onSubmit({ category: "-", time: cnt.time })} > <Icon src={time}></Icon>{cnt.time} min</DivBot>
                             <DivBot onClick={() => onSubmit({ category: cnt.category, time: "-" })}><Icon src={tag}></Icon>{cnt.category}</DivBot>
-                            <DivBot onClick={() => goLike({ like_1: true, id_cnt: cnt._id, id_user: userOn._id })}>Like</DivBot>
+                            <DivBot onClick={() => goLike({ like_1: true, id_cnt: cnt._id, id_user: userOn._id })}>{counter(cnt.like_1)} Like</DivBot>
                         </DivInfo>
                     </LiCnt>
                 }))}
