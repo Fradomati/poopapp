@@ -141,7 +141,9 @@ router.post("/likeButton", async (req, res) => {
                 }
             }
         )
-        res.json({ status: 200, message: "Desmarcado" })
+        const updateCnt = await Content.findById(id_cnt)
+        const updateUser = await User.findById(id_user)
+        res.json({ updateCnt, updateUser })
     }
 })
 
