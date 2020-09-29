@@ -23,6 +23,7 @@ export const Content = withProtected(() => {
 
     const [allCnt, setAllCnt] = useState()
     const [userOn, setUserOn] = useContext(UserInfoContext)
+    const [dataCnt, setDataCnt] = useState()
 
     useEffect(() => {
         getContentFN().then(e => {
@@ -30,7 +31,7 @@ export const Content = withProtected(() => {
         })
     }, [])
 
-    // Form to filter category
+    // FORM TO FILTER OF CURRENT CONTENT
 
     const { register, handleSubmit, errors, reset } = useForm(
         {
@@ -40,6 +41,8 @@ export const Content = withProtected(() => {
     );
 
     const onSubmit = async (data) => {
+        // store data to prevent update of fav counter
+        setDataCnt(data)
         if (data.category === "-" && data.time === "-") {
             const responseServer = await getContentFN(data)
             setAllCnt(responseServer)
@@ -51,7 +54,7 @@ export const Content = withProtected(() => {
     };
     if (errors) console.log(errors);
 
-
+    // FUNCTION ADD / REMOVE LIKE TO CONTENT (LIKE_1 TRUE OR FALSE)
     const goLike = async ({ like_1, id_cnt, id_user }) => {
         const responseServer = await likeBtn({ like_1, id_cnt, id_user })
         console.log(responseServer)
@@ -62,6 +65,7 @@ export const Content = withProtected(() => {
         setUserOn(updateUser)
     }
 
+    // FUNCTION COUNT THE TOTAL LIKES ON CONTENT
     const counter = (data) => {
         if (data.length) {
             return data.length
@@ -70,6 +74,28 @@ export const Content = withProtected(() => {
         }
     }
 
+    // UPDATE CONTENT WITH NEW LIKES
+    useEffect(() => {
+        console.log("holaaa", dataCnt)
+        if (dataCnt) {
+            onSubmit(dataCnt).then(console.log("HECHO"))
+        } else {
+            getContentFN().then(e => {
+                setAllCnt(e)
+            })
+        }
+    }, [userOn])
+
+    // FUNCTION CHECK IF THE USER HAVE CONTENT LIKE SELECTED AND MARK IT ON PAGE
+
+    const isItLiked = (arr) => {
+        const id_user = userOn._id
+        if (arr.includes(id_user)) {
+            return true
+        } else {
+            false
+        }
+    }
 
     return <Container>
         <CntDiv>
@@ -111,7 +137,11 @@ export const Content = withProtected(() => {
                         <DivInfo>
                             <DivBot onClick={() => onSubmit({ category: "-", time: cnt.time })} > <Icon src={time}></Icon>{cnt.time} min</DivBot>
                             <DivBot onClick={() => onSubmit({ category: cnt.category, time: "-" })}><Icon src={tag}></Icon>{cnt.category}</DivBot>
-                            <DivBot onClick={() => goLike({ like_1: true, id_cnt: cnt._id, id_user: userOn._id })}>{counter(cnt.like_1)} Like</DivBot>
+                            {
+                                isItLiked(cnt.like_1) === true
+                                    ? <DivBot onClick={() => goLike({ like_1: false, id_cnt: cnt._id, id_user: userOn._id })}>{counter(cnt.like_1)} LIKED</DivBot>
+                                    : <DivBot onClick={() => goLike({ like_1: true, id_cnt: cnt._id, id_user: userOn._id })}>{counter(cnt.like_1)} Like</DivBot>
+                            }
                         </DivInfo>
                     </LiCnt>
                 }))}
