@@ -9,12 +9,14 @@ import { useForm } from "react-hook-form"
 // Styles
 
 import { Container, A, LinkTo, InputSelect } from "../globalStyles"
-import { CntDiv, UlCnt, LiCnt, DivInfo, DivTitle, DivBot, Icon, AddBtn } from "./style"
+import { CntDiv, UlCnt, LiCnt, DivInfo, DivTitle, DivBot, Icon, IconLike, AddBtn } from "./style"
 
 // Img
 
 import time from "../../../public/images/icons/time.png"
 import tag from "../../../public/images/icons/tag.png"
+import liked from "../../../public/images/icons/+1_on.png"
+import like from "../../../public/images/icons/+1_off.png"
 
 
 
@@ -139,8 +141,8 @@ export const Content = withProtected(() => {
                             <DivBot onClick={() => onSubmit({ category: cnt.category, time: "-" })}><Icon src={tag}></Icon>{cnt.category}</DivBot>
                             {
                                 isItLiked(cnt.like_1) === true
-                                    ? <DivBot onClick={() => goLike({ like_1: false, id_cnt: cnt._id, id_user: userOn._id })}>{counter(cnt.like_1)} LIKED</DivBot>
-                                    : <DivBot onClick={() => goLike({ like_1: true, id_cnt: cnt._id, id_user: userOn._id })}>{counter(cnt.like_1)} Like</DivBot>
+                                    ? <DivBot onClick={() => goLike({ like_1: false, id_cnt: cnt._id, id_user: userOn._id })}>{counter(cnt.like_1)} <IconLike src={liked}></IconLike></DivBot>
+                                    : <DivBot onClick={() => goLike({ like_1: true, id_cnt: cnt._id, id_user: userOn._id })}>{counter(cnt.like_1)} <IconLike src={like}></IconLike></DivBot>
                             }
                         </DivInfo>
                     </LiCnt>

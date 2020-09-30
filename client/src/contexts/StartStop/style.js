@@ -38,3 +38,6 @@ display: flex;
 align-items: center;
 font-size: 1.2em;
 `
+export const IconOn = styled.img`
+width: 0.8em
+`

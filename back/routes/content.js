@@ -75,27 +75,7 @@ router.post("/findCategory", async (req, res) => {
     }
 })
 
-/*
 
-Dos modelos, User y Content.
-
-Básico:
-
-- Si un usuario le da a like_1, mandamos un "true" de like_1, el ID del contenido y el ID del usuario. 
-- Con el "True" confirmamos qué opción a marcado.
-- Buscamos el contenido marcado y le agregamos el "ID de Usuario" a like_1 (modelo content)
-- Por otro lado, buscamos al usuario y le agregamos el "ID de Content" a su like_1 (modelo user)
-- Solo puede haber seleccionado una opción.
-
-Caso 1 - Desmarcar:
-
-- Solo puede haber 1 like/dislike por artículo, por lo que si vuelve a pulsar en la misma opción
-el resultado sería "desmarcar" la opción por lo que se debe borrar el ID tanto del Modelo User como del Modelo Content.
-
-
-IDEA: ¿Es necesario que haya dislike?
-
-*/
 router.post("/likeButton", async (req, res) => {
     const { like_1, id_cnt, id_user } = req.body
 
@@ -103,24 +83,32 @@ router.post("/likeButton", async (req, res) => {
 
     if (like_1 === true) {
 
-        console.log("AHORA CONTENT")
-        await Content.findByIdAndUpdate(
-            { _id: id_cnt },
-            {
-                $push: {
-                    like_1: id_user
-                }
-            }
+        // Prevent double click
+        const existElement = await Content.findByIdAndUpdate(
+            { _id: id_cnt }
         )
-        console.log("AHORA USER")
-        await User.findByIdAndUpdate(
-            { _id: id_user },
-            {
-                $push: {
-                    likesContent: id_cnt
+        if (existElement.like_1.includes(id_user)) {
+            console.log("SOoooooo")
+            res.json({ status: 500, message: "¡Más despacio!" })
+        } else {
+
+            await Content.findByIdAndUpdate(
+                { _id: id_cnt },
+                {
+                    $push: {
+                        like_1: id_user
+                    }
                 }
-            }
-        )
+            )
+            await User.findByIdAndUpdate(
+                { _id: id_user },
+                {
+                    $push: {
+                        likesContent: id_cnt
+                    }
+                }
+            )
+        }
         const updateCnt = await Content.findById(id_cnt)
         const updateUser = await User.findById(id_user)
         res.json({ updateCnt, updateUser })

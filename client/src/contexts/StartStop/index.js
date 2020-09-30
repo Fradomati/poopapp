@@ -6,13 +6,15 @@ import { whoameFN } from "../../services/AuthService"
 import { ON_user, OFF_user, ASK_user } from "../../services/OnlineUserService"
 
 // Styles
-import { StartedButton, StoppedButton, MainContainer, Img, LogoImg, InfoDiv } from "./style"
+import { StartedButton, StoppedButton, MainContainer, Img, LogoImg, InfoDiv, IconOn } from "./style"
 
 // Icons 
 import bano from "../../../public/images/icons/bano.png"
 import openBano from "../../../public/images/icons/bano-abierto.png"
 import logo from "../../../public/images/icons/Pooptime-Logo2.png"
 import logoAnimated from "../../../public/images/icons/Poop-Time-gif.gif"
+import onlineIcon from "../../../public/images/icons/online-icon.png"
+
 
 export const StartStopContext = createContext();
 
@@ -126,7 +128,7 @@ export const StartStopButton = props => {
                     {start == true && <StoppedButton onClick={() => { push(false) }}><Img src={openBano} ></Img></StoppedButton>}
                     <LogoImg src={start ? logoAnimated : logo}></LogoImg>
 
-                    <InfoDiv>{welcomeMsg == true ? `Welcome ${userOn.username}` : onlineUsers}</InfoDiv>
+                    <InfoDiv>{welcomeMsg == true ? `Welcome ${userOn.username}` : <div>{onlineUsers}<IconOn src={onlineIcon}></IconOn></div>}</InfoDiv>
                 </MainContainer>
             )
             }

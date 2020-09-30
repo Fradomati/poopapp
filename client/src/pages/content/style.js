@@ -49,6 +49,11 @@ width: 0.8em;
 margin-right: 0.3em;
 `
 
+export const IconLike = styled.img`
+width: 1.3em;
+margin-left: 0.3em;
+`
+
 export const AddBtn = styled.div`
 margin: 0.8em 0;
 padding: 0.5em 2em;
