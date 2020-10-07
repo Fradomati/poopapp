@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "update": "node ./bin/update.js",
     "start": "node ./bin/www",
     "dev": "DEBUG=back:* nodemon ./bin/www",
     "dev-windows": "nodemon ./bin/www"
