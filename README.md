@@ -2,7 +2,8 @@
 
 
 Go fun =)! => https://pooptime-client.herokuapp.com/
-Video => [![PoopTime Video](https://img.youtube.com/vi/lOd7fuo4VAM/0.jpg)](https://www.youtube.com/watch?v=lOd7fuo4VAM")
+
+[![PoopTime Video](https://img.youtube.com/vi/lOd7fuo4VAM/0.jpg)](https://www.youtube.com/watch?v=lOd7fuo4VAM")
 
 # Pooptime
 
